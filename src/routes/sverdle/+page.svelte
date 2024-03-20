@@ -1,6 +1,7 @@
 <script>
 	import { confetti } from '@neoconfetti/svelte';
 	import { enhance } from '$app/forms';
+	import { base } from '$app/paths';
 
 	import { reduced_motion } from './reduced-motion';
 
