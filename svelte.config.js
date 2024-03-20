@@ -9,7 +9,9 @@ const config = {
 
 	kit: {
 		adapter: adapter({
-			fallback: 'index.html'
+			pages: 'build',
+			assets: 'build',
+			fallback: null
 		}),
 		paths: {
 			base: process.env.NODE_ENV === 'production' ? '/leppy-oss.github.io' : '',
