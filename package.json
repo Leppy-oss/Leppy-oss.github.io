@@ -1,6 +1,7 @@
 {
 	"name": "leppy-oss-portfolio",
 	"version": "0.0.1",
+	"homepage": "https://leppy-oss.github.io/",
 	"scripts": {
 		"dev": "vite dev",
 		"build": "vite build",

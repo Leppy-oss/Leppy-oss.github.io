@@ -2,11 +2,9 @@
 	import Counter from "./Counter.svelte";
 	import welcome from "$lib/images/svelte-welcome.webp";
 	import welcome_fallback from "$lib/images/svelte-welcome.png";
-	import { onMount, onDestroy } from "svelte";
-	import { slide, fly, scale, fade, draw } from "svelte/transition";
 
 	import { backOut } from "svelte/easing";
-	import Typewriter from "svelte-typewriter";
+	// import Typewriter from "svelte-typewriter";
 
 	const descriptionWords = [
 		"designer.",
@@ -33,12 +31,9 @@
 		</span>
 	</h1>
 
+	<!--
 	<div class="rotating-description-text">
-		<p
-			transition:scale
-			id="rotating-description"
-			style="display:inline-block"
-		>
+		<p id="rotating-description" style="display:inline-block">
 			Hi! I'm Leppy-oss. I am a
 			<Typewriter mode="loop" interval={[40, 50, 60]}>
 				{#each descriptionWords as word, i}
@@ -47,6 +42,7 @@
 			</Typewriter>
 		</p>
 	</div>
+	-->
 
 	<h2>
 		try editing <strong>src/routes/+page.svelte</strong>
