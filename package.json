@@ -1,7 +1,7 @@
 {
-  "name": "@onwidget/astrowind",
-  "version": "1.0.0-beta.38",
-  "description": "AstroWind: A free template using Astro 4.0 and Tailwind CSS. Astro starter theme.",
+  "name": "@leppy-oss/portfolio",
+  "version": "0.1.0",
+  "description": "Portfolio/personal website for Leppy-oss!",
   "type": "module",
   "private": true,
   "engines": {
@@ -27,6 +27,7 @@
     "astro-icon": "^1.1.0",
     "limax": "4.1.0",
     "lodash.merge": "^4.6.2",
+    "tailwind-typewriter": "^1.0.1",
     "unpic": "^3.18.0"
   },
   "devDependencies": {

@@ -1,6 +1,6 @@
 # WELCOME
 
-Hi! 👋 Welcome to my personal repository! I'm super excited to show you around - just click <a href="https://leppy-oss.github.io/" target="_blank">here</a> :)
+Hi! 👋 Welcome to my website repository. I'm excited to show you around - just click <a href="https://leppy-oss.github.io/" target="_blank">here</a> :)
 
 ## TECH STACK
 

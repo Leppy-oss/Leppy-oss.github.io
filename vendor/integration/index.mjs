@@ -7,7 +7,7 @@ import loadConfig from './utils/loadConfig';
 export default ({ config: _themeConfig = 'src/config.yaml' } = {}) => {
   let cfg;
   return {
-    name: 'astrowind-integration',
+    name: 'portfolio-integration',
 
     hooks: {
       'astro:config:setup': async ({
@@ -19,9 +19,9 @@ export default ({ config: _themeConfig = 'src/config.yaml' } = {}) => {
         updateConfig,
         addWatchFile,
       }) => {
-        const buildLogger = logger.fork('astrowind');
+        const buildLogger = logger.fork('portfolio');
 
-        const virtualModuleId = 'astrowind:config';
+        const virtualModuleId = 'portfolio:config';
         const resolvedVirtualModuleId = '\0' + virtualModuleId;
 
         const rawJsonConfig = await loadConfig(_themeConfig);
@@ -36,7 +36,7 @@ export default ({ config: _themeConfig = 'src/config.yaml' } = {}) => {
           vite: {
             plugins: [
               {
-                name: 'vite-plugin-astrowind-config',
+                name: 'vite-plugin-portfolio-config',
                 resolveId(id) {
                   if (id === virtualModuleId) {
                     return resolvedVirtualModuleId;
@@ -62,9 +62,9 @@ export default ({ config: _themeConfig = 'src/config.yaml' } = {}) => {
         if (typeof _themeConfig === 'string') {
           addWatchFile(new URL(_themeConfig, config.root));
 
-          buildLogger.info(`Astrowind \`${_themeConfig}\` has been loaded.`);
+          buildLogger.info(`Portfolio \`${_themeConfig}\` has been loaded.`);
         } else {
-          buildLogger.info(`Astrowind config has been loaded.`);
+          buildLogger.info(`Portfolio config has been loaded.`);
         }
       },
       'astro:config:done': async ({ config }) => {
@@ -72,7 +72,7 @@ export default ({ config: _themeConfig = 'src/config.yaml' } = {}) => {
       },
 
       'astro:build:done': async ({ logger }) => {
-        const buildLogger = logger.fork('astrowind');
+        const buildLogger = logger.fork('portfolio');
         buildLogger.info('Updating `robots.txt` with `sitemap-index.xml` ...');
 
         try {

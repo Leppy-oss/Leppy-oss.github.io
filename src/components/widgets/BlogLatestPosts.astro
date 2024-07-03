@@ -1,5 +1,5 @@
 ---
-import { APP_BLOG } from 'astrowind:config';
+import { APP_BLOG } from 'portfolio:config';
 
 import Grid from '~/components/blog/Grid.astro';
 
@@ -19,7 +19,7 @@ export interface Props extends Widget {
 
 const {
   title = await Astro.slots.render('title'),
-  linkText = 'View all posts',
+  linkText = '⇒ Click here to view all posts ⇐',
   linkUrl = getBlogPermalink(),
   information = await Astro.slots.render('information'),
   count = 4,
@@ -38,7 +38,7 @@ const posts = APP_BLOG.isEnabled ? await findLatestPosts({ count }) : [];
     <WidgetWrapper id={id} isDark={isDark} containerClass={classes?.container as string} bg={bg}>
       <div class="flex flex-col lg:justify-between lg:flex-row mb-8">
         {title && (
-          <div class="md:max-w-sm">
+          <div class="w-full text-center">
             <h2
               class="text-3xl font-bold tracking-tight sm:text-4xl sm:leading-none group font-heading mb-2"
               set:html={title}
@@ -46,7 +46,7 @@ const posts = APP_BLOG.isEnabled ? await findLatestPosts({ count }) : [];
             {APP_BLOG.list.isEnabled && linkText && linkUrl && (
               <Button variant="link" href={linkUrl}>
                 {' '}
-                {linkText} »
+                {linkText}
               </Button>
             )}
           </div>

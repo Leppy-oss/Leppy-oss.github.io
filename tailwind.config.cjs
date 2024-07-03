@@ -16,9 +16,23 @@ module.exports = {
         sans: ['var(--aw-font-sans, ui-sans-serif)', ...defaultTheme.fontFamily.sans],
         serif: ['var(--aw-font-serif, ui-serif)', ...defaultTheme.fontFamily.serif],
         heading: ['var(--aw-font-heading, ui-sans-serif)', ...defaultTheme.fontFamily.sans],
-      },
+      }
     },
   },
-  plugins: [typographyPlugin],
+  plugins: [
+    typographyPlugin,
+    require('tailwind-typewriter')({
+      wordsets: {
+          descriptors: {
+              words: ['developer', 'engineer', 'student', 'leader'],
+              delay: 0.5,
+              pauseBetween: 2,
+              writeSpeed: 0.15,
+              caretWidth: '0.25rem',
+              caretColor: 'var(--aw-color-text-default)'
+          }
+      }
+  })
+  ],
   darkMode: 'class',
 };

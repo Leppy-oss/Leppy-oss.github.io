@@ -28,9 +28,11 @@ export default [
     },
   },
   {
-    files: ['**/*.{js,jsx,astro}'],
+    files: ['**/*.{js,cjs,jsx,astro}'],
     rules: {
       'no-mixed-spaces-and-tabs': ['error', 'smart-tabs'],
+      'no-unused-vars': false,
+      'no-var-requires': false
     },
   },
   {
