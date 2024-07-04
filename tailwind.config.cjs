@@ -31,8 +31,9 @@ module.exports = {
               caretWidth: '0.25rem',
               caretColor: 'var(--aw-color-text-default)'
           }
-      }
-  })
+      },
+  }),
+  require('daisyui')
   ],
   darkMode: 'class',
 };
