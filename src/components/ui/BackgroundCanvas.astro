@@ -1,19 +1,22 @@
+---
+---
+
 <div class="w-full">
   <canvas id="home-canvas"></canvas>
   <script>
-    import Two from "two.js";
+    import Two from 'two.js';
+    const rocketImg = new Image(500, 500); rocketImg.src = '/src/assets/images/canvas/rocket.png';
     const canvas = document.getElementById("home-canvas") as HTMLCanvasElement;
     const ctx = canvas.getContext("2d");
-    const rocketImg = new Image(100, 100);
     const params = {
       fitted: true,
-      domElement: canvas,
+      domElment: canvas,
     };
-    const two = new Two(params).appendTo(document.body);
-    two.makeRectangle(100, 100, 500, 500);
+    // const two = new Two(params).appendTo(document.body);
+    canvas.style.position = 'fixed';
+    canvas.style.backgroundColor = 'red';
+    two.makeRectangle(200, 200, 500, 500);
     two.update();
-    rocketImg.src = "assets/images/canvas/rocket.jpg";
-    ctx.fill();
     ctx.drawImage(rocketImg, 100, 100);
   </script>
 </div>
