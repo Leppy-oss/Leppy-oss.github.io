@@ -1,34 +1,42 @@
 ---
-import Layout from '~/layouts/PageLayout.astro';
+import Layout from "~/layouts/PageLayout.astro";
 
-import Hero from '~/components/widgets/Hero.astro';
-import Note from '~/components/widgets/Note.astro';
-import Features from '~/components/widgets/Features.astro';
-import Features2 from '~/components/widgets/Features2.astro';
-import Steps from '~/components/widgets/Steps.astro';
-import Content from '~/components/widgets/Content.astro';
-import BlogLatestPosts from '~/components/widgets/BlogLatestPosts.astro';
-import Stats from '~/components/widgets/Stats.astro';
-import CallToAction from '~/components/widgets/CallToAction.astro';
+import Hero from "~/components/widgets/Hero.astro";
+import Note from "~/components/widgets/Note.astro";
+import Features from "~/components/widgets/Features.astro";
+import Features2 from "~/components/widgets/Features2.astro";
+import Steps from "~/components/widgets/Steps.astro";
+import Content from "~/components/widgets/Content.astro";
+import BlogLatestPosts from "~/components/widgets/BlogLatestPosts.astro";
+import Stats from "~/components/widgets/Stats.astro";
+import CallToAction from "~/components/widgets/CallToAction.astro";
+import BackgroundHome from "~/components/ui/BackgroundHome.astro";
 
 const metadata = {
-  title: 'Leppy-oss Portfolio | Home',
+  title: "Leppy-oss Portfolio | Home",
   ignoreTitleTemplate: true,
 };
 ---
 
 <Layout metadata={metadata}>
-  <Hero actions={[
+  <BackgroundHome />
+  <Hero
+    actions={[
       {
-        variant: 'primary',
-        text: 'Learn More',
+        variant: "primary",
+        text: "Learn More",
       },
     ]}
   >
     <Fragment slot="title" class="items-center justify-center">
-      Hi, my name is <span class="bg-gradient-to-r from-muted to-accent bg-clip-text text-transparent">Leppy-oss</span>.<br />
+      Hi, my name is <span
+        class="bg-gradient-to-r from-muted to-accent bg-clip-text text-transparent"
+        >Leppy-oss</span
+      >.<br />
       I'm an aspiring
-      <span class="type-descriptors bg-gradient-to-r from-muted to-accent bg-clip-text text-transparent" />
+      <span
+        class="type-descriptors bg-gradient-to-r from-muted to-accent bg-clip-text text-transparent"
+      ></span>
       .
     </Fragment>
   </Hero>
@@ -217,10 +225,10 @@ const metadata = {
   <Stats
     title="Stats About Me"
     stats={[
-      { title: 'Blinks', amount: '88M' },
-      { title: 'Eyes', amount: '2' },
-      { title: 'Hairs', amount: '100000' },
-      { title: 'Taste-Buds', amount: '8000' },
+      { title: "Blinks", amount: "88M" },
+      { title: "Eyes", amount: "2" },
+      { title: "Hairs", amount: "100000" },
+      { title: "Taste-Buds", amount: "8000" },
     ]}
   />
 

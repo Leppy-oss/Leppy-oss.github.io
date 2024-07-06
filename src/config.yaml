@@ -1,6 +1,6 @@
 site:
-  name: AstroWind
-  site: 'https://astrowind.vercel.app'
+  name: Leppy-oss Portfolio
+  site: 'https://leppy-oss.github.io'
   base: '/'
   trailingSlash: false
 
@@ -9,23 +9,23 @@ site:
 # Default SEO metadata
 metadata:
   title:
-    default: AstroWind
-    template: '%s — AstroWind'
-  description: "\U0001F680 Suitable for Startups, Small Business, Sass Websites, Professional Portfolios, Marketing Websites, Landing Pages & Blogs."
+    default: Leppy-oss Portfolio
+    template: '%s — Leppy-oss Portfolio'
+  description: "\U0001F680 The official website of Leppy-oss!"
   robots:
     index: true
     follow: true
   openGraph:
-    site_name: AstroWind
-    images:
-      - url: '~/assets/images/default.png'
-        width: 1200
-        height: 628
+    site_name: Leppy-oss Portfolio
+    # images:
+    #  - url: '~/assets/images/default.png'
+    #    width: 1200
+    #    height: 628
     type: website
-  twitter:
-    handle: '@onwidget'
-    site: '@onwidget'
-    cardType: summary_large_image
+  # twitter:
+  #  handle: '@onwidget'
+  #  site: '@onwidget'
+  #  cardType: summary_large_image
 
 i18n:
   language: en

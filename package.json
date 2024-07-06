@@ -28,6 +28,7 @@
     "limax": "4.1.0",
     "lodash.merge": "^4.6.2",
     "tailwind-typewriter": "^1.0.1",
+    "two.js": "^0.8.14",
     "unpic": "^3.18.0"
   },
   "devDependencies": {
@@ -46,7 +47,7 @@
     "astro-compress": "2.2.28",
     "astro-eslint-parser": "^1.0.2",
     "daisyui": "^4.12.10",
-    "eslint": "8.57.0",
+    "eslint": "^8.57.0",
     "eslint-plugin-astro": "^1.2.2",
     "eslint-plugin-jsx-a11y": "^6.9.0",
     "globals": "^15.6.0",
