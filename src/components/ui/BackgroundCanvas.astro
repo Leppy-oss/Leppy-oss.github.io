@@ -2,21 +2,17 @@
 ---
 
 <div class="w-full">
-  <canvas id="home-canvas"></canvas>
+  <canvas id="home-canvas" class="min-w-full"></canvas>
   <script>
     import Two from 'two.js';
     const rocketImg = new Image(500, 500); rocketImg.src = '/src/assets/images/canvas/rocket.png';
-    const canvas = document.getElementById("home-canvas") as HTMLCanvasElement;
-    const ctx = canvas.getContext("2d");
-    const params = {
+    const canvas = document.getElementById('home-canvas') as HTMLCanvasElement;
+    // const ctx = canvas.getContext('2d');
+    const two = new Two({
       fitted: true,
-      domElment: canvas,
-    };
-    const two = new Two(params).appendTo(document.body);
-    canvas.style.position = 'fixed';
-    canvas.style.backgroundColor = 'red';
-    two.makeRectangle(200, 200, 500, 500);
+      domElement: canvas
+    }).appendTo(document.getElementById('background-home'));
+
     two.update();
-    ctx.drawImage(rocketImg, 100, 100);
   </script>
 </div>
