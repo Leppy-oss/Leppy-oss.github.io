@@ -2,7 +2,7 @@ import { Box } from '@mantine/core';
 // import Navbar from './navbar.component';
 import Head from 'next/head'
 import { usePathname } from 'next/navigation';
-// import Footer from './footer';
+import Footer from './footer';
 
 export default function Layout({ children }) {
     const rawPathname = usePathname().slice(1);
@@ -10,7 +10,7 @@ export default function Layout({ children }) {
     return (
         <div className='app'>
             <Head>
-                <link rel='icon' href='/GearLogoNoBG.svg' />
+                <link rel='icon' href='/logo.svg' />
                 <meta name='theme-color' content='#000000' />
                 <meta name='description' content='Personal website and portfolio for Leppy-oss!' />
                 <title>{`${pathname || 'Home'} | Leppy-oss-Portfolio`}</title>
@@ -21,7 +21,7 @@ export default function Layout({ children }) {
                 <Box ml='1rem' mr='1rem'>
                     {children}
                 </Box>
-                {/* <Footer /> */}
+                <Footer />
             </main>
         </div>
     )

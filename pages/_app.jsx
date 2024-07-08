@@ -11,6 +11,7 @@ import '@fontsource/roboto/700.css';
 import Aos from 'aos';
 import 'aos/dist/aos.css';
 import { useEffect } from "react";
+import GsapProvider from "../lib/gsap-provider";
 
 function MyApp({ Component, pageProps }) {
     useEffect(() => {
@@ -19,11 +20,14 @@ function MyApp({ Component, pageProps }) {
             once: false
         });
     }, []);
+
     return (
         <MantineProvider withGlobalStyles withNormalizeCSS>
-            <Layout>
-                <Component {...pageProps} />
-            </Layout>
+            <GsapProvider>
+                <Layout>
+                    <Component {...pageProps} />
+                </Layout>
+            </GsapProvider>
         </MantineProvider>
     );
 }
