@@ -1,8 +1,8 @@
 import { Box } from '@mantine/core';
-// import Navbar from './navbar.component';
 import Head from 'next/head'
 import { usePathname } from 'next/navigation';
 import Footer from './footer';
+import { Header } from './header';
 
 export default function Layout({ children }) {
     const rawPathname = usePathname().slice(1);
@@ -17,7 +17,7 @@ export default function Layout({ children }) {
             </Head>
             <main>
                 <noscript>You need to enable JavaScript to run this app.</noscript>
-                {/* <Navbar /> */}
+                <Header />
                 <Box ml='1rem' mr='1rem'>
                     {children}
                 </Box>

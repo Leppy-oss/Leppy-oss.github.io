@@ -3,13 +3,14 @@ import { IconBrandX, IconBrandYoutube, IconBrandInstagram, IconArrowNarrowUp } f
 import classes from '../styles/footer.module.css';
 import { useGSAP } from '@gsap/react';
 import { scrollTo } from '../lib/gsap-provider';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 export default function Footer() {
     const [buttonHandler, setButtonHandler] = useState(() => () => {});
     useGSAP(() => {
         setButtonHandler(() => () => scrollTo(0.8, 0));
     });
+
     return (
         <div className={classes.footer}>
             <Container fluid className={classes.inner}>

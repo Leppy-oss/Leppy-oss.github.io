@@ -1,0 +1,11 @@
+.nt {
+    font-size: 5rem;
+    font-weight: 500;
+}
+
+.gradText {
+    font-size: 72px;
+    background: -webkit-linear-gradient(#eee, #333);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
