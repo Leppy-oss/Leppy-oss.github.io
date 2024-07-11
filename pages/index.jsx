@@ -1,39 +1,46 @@
-import { Container, Divider, Group, Text } from '@mantine/core';
+import { Container, Divider, Group, Text, useMantineTheme } from '@mantine/core';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 import classes from '../styles/home.module.css';
 import GradientText from '../components/GradientText';
-import { DEFAULT_THEME as theme } from '@mantine/core';
+import animationData from './lotties/confetti.json';
+import { useRef } from 'react';
+import { useLottie } from 'lottie-react';
 
 export default function Home() {
+    const theme = useMantineTheme();
+
     useGSAP(() => {
         gsap.timeline({
             snap: {
                 snapTo: 'labels',
-                duration: { min: 0.5, max: 3 },
+                duration: { min: 0.25, max: 3 },
                 delay: 0.2,
                 ease: 'power1.inOut'
             }
-        })
-            .from('.name-text-1', { x: -1000, delay: 0.5 }, 0)
-            .from('.name-text-2', { x: -1000, delay: 1 }, 0)
-            .to('.o-leppy', { rotationX: 360, duration: 0.5, repeat: -1, repeatDelay: gsap.utils.random(2.5, 5), delay: 0.5 })
+        }).from('#name-text-1', { x: -1000, delay: 0.5 }, 0)
+            .from('#name-text-2', { x: -1000, delay: 0.1 }, 1)
+            .to('#name-text-2', { backgroundPosition: document.getElementById('name-text-2').clientWidth, duration: 1, ease: 'power3.in' }, 1)
             .eventCallback('onComplete', () => {
-            });
+                console.log('finished animations')
+            }, [])
     });
+
+    const { View: ConfettiLottie } = useLottie({
+        animationData,
+        loop: false,
+        autoplay: false
+    });
+    console.log(ConfettiLottie)
 
     return (
         <Container className='container'>
             <Container>
-                <GradientText className={classes.nt} from={theme.colors.blue[6]} to={theme.colors.pink[6]}>text<span className='o-leppy' style={{display: 'inline-block',
-                        zIndex: 1,
-                }}>the final test</span></GradientText>
-                <p>a<span className={`${classes.nt} ${classes.gradText} o-leppy`} style={{display: 'inline-block',
-                        WebkitTextFillColor: 'transparent',
-                }}>bb</span>c</p>
-                <Text className='nt name-text-1'>Hi, my name is </Text>
-                <Text className='nt name-text-2' variant='gradient' gradient={{ from: 'blue', to: 'pink' }}>
-                    Leppy-<Text span display='inline-flex' className='o-leppy'>o</Text>ss</Text>
+                <Text className={classes.nt} id='name-text-1'>Hi, my name is </Text>
+                <Group>
+                    <GradientText className={classes.nt} id='name-text-2' from={theme.colors.blue[6]} to={theme.colors.pink[6]}>Leppy-oss</GradientText>
+                    {/*<ConfettiLottie />*/}
+                </Group>
             </Container>
             <div>
                 This is the homepage.

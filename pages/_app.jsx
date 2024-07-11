@@ -22,7 +22,7 @@ function MyApp({ Component, pageProps }) {
     }, []);
 
     return (
-        <MantineProvider withGlobalStyles withNormalizeCSS>
+        <MantineProvider withGlobalStyles withNormalizeCSS defaultColorScheme='light'>
             <GsapProvider>
                 <Layout>
                     <Component {...pageProps} />
