@@ -6,6 +6,7 @@
 		"@fontsource/roboto": "^5.0.13",
 		"@gsap/react": "^2.1.1",
 		"@mantine/charts": "^7.11.0",
+		"@mantine/code-highlight": "^7.11.1",
 		"@mantine/core": "^7.11.0",
 		"@mantine/form": "^7.11.0",
 		"@mantine/hooks": "^7.11.0",
@@ -34,6 +35,7 @@
 		"recharts": "^2.12.7",
 		"rehype-autolink-headings": "^7.1.0",
 		"rehype-slug": "^6.0.0",
+		"slugify": "^1.6.6",
 		"sweetalert2": "^11.11.1",
 		"web-vitals": "^2.1.4"
 	},

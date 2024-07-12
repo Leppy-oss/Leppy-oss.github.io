@@ -4,7 +4,6 @@ import { useGSAP } from '@gsap/react';
 import classes from '../styles/home.module.css';
 import GradientText from '../components/GradientText';
 import animationData from './lotties/confetti.json';
-import { useRef } from 'react';
 import { useLottie } from 'lottie-react';
 
 export default function Home() {
@@ -31,11 +30,11 @@ export default function Home() {
         loop: false,
         autoplay: false
     });
-    console.log(ConfettiLottie)
+    // console.log(ConfettiLottie)
 
     return (
         <Container className='container'>
-            <Container>
+            <Container ml={0}>
                 <Text className={classes.nt} id='name-text-1'>Hi, my name is </Text>
                 <Group>
                     <GradientText className={classes.nt} id='name-text-2' from={theme.colors.blue[6]} to={theme.colors.pink[6]}>Leppy-oss</GradientText>

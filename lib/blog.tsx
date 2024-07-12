@@ -23,33 +23,21 @@ interface Post {
     meta: PostMeta;
 }
 
-/* Joining the current working directory with the `posts` directory. */
-const POSTS_PATH = path.join(process.cwd(), 'posts');
+const BLOG_PATH = path.join(process.cwd(), 'blog');
 
-/**
- * It takes all the files in the `posts` directory, splits the file path into an array, grabs the last
- * item in the array (the file name), splits the file name into an array, grabs the first item in the
- * array (the slug), and returns an array of slugs
- * @returns An array of strings.
- */
 export const getSlugs = (): string[] => {
-    const paths = sync(normalize(`${POSTS_PATH}/*.mdx`));
+    const paths = sync(normalize(`${BLOG_PATH}/*.mdx`));
 
     return paths.map((filePath) => {
-        const parts = filePath.split('/');
+        const parts = filePath.split(/[/\\]/);
         const fileName = parts[parts.length - 1];
         const [slug] = fileName.split('.');
         return slug;
     });
 };
 
-/**
- * It takes a slug, reads the corresponding file, and returns a `Post` object
- * @param {string} slug - The slug of the post we want to get.
- * @returns An object with two properties: content and meta.
- */
 export const getPostFromSlug = (slug: string): Post => {
-    const postPath = path.join(POSTS_PATH, `${slug}.mdx`);
+    const postPath = path.join(BLOG_PATH, `${slug}.mdx`);
     const source = fs.readFileSync(postPath);
     const { content, data } = matter(source);
 
@@ -60,7 +48,7 @@ export const getPostFromSlug = (slug: string): Post => {
             excerpt: data.excerpt ?? '',
             title: data.title ?? slug,
             tags: (data.tags ?? []).sort(),
-            date: (data.date ?? new Date()).toString(),
+            date: (data.date ?? new Date()).toUTCString().slice(0, 16),
             image: data.image ?? undefined,
             author: data.author ?? undefined,
             category: data.category ?? undefined,
@@ -68,10 +56,6 @@ export const getPostFromSlug = (slug: string): Post => {
     };
 };
 
-/**
- * Get all the slugs, get the post from each slug, sort the posts by date, and return the posts
- * @returns An array of objects.
- */
 export const getAllPosts = () => {
     const posts = getSlugs()
         .map((slug) => getPostFromSlug(slug))

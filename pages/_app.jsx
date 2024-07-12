@@ -12,8 +12,11 @@ import Aos from 'aos';
 import 'aos/dist/aos.css';
 import { useEffect } from "react";
 import GsapProvider from "../lib/gsap-provider";
+import { useToggle } from "@mantine/hooks";
 
 function MyApp({ Component, pageProps }) {
+    const [darkMode, toggleDarkMode] = useToggle([false, true]);
+
     useEffect(() => {
         Aos.init({
             duration: 800,

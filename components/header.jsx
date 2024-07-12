@@ -24,14 +24,15 @@ import {
 import { useDisclosure } from '@mantine/hooks';
 import {
     IconChevronDown,
-    IconSun
+    IconSun,
+    IconMoonStars
 } from '@tabler/icons-react';
 import classes from '../styles/header.module.css';
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
-export function Header() {
+export function Header({ darkMode }) {
     const [drawerOpened, { toggle: toggleDrawer, close: closeDrawer }] = useDisclosure(false);
     const [linksOpened, { toggle: toggleLinks }] = useDisclosure(false);
     const theme = useMantineTheme();
@@ -120,7 +121,7 @@ export function Header() {
                                             {featuredProjects.map(proj =>
                                                 <Grid.Col span={4} key={proj.repo}>
                                                     <Paper radius='lg' shadow p='1em'>
-                                                        <Anchor underline='never' variant='gradient' gradient={{from: 'blue', to: 'cyan'}} type='a' href={proj.repo}>
+                                                        <Anchor underline='never' variant='gradient' gradient={{ from: 'blue', to: 'cyan' }} type='a' href={proj.repo}>
                                                             {proj.displayName}
                                                         </Anchor>
                                                         {featuredProjectDescriptions &&
@@ -148,19 +149,17 @@ export function Header() {
                                 </Container>
                             </HoverCard.Dropdown>
                         </HoverCard>
-                        <a href='/blog' className={classes.link}>
-                            Blog
-                        </a>
-                        <a href='/about' className={classes.link}>
-                            About
-                        </a>
+                        <Link href='/blog' className={classes.link}>Blog</Link>
+                        <Link href='/about' className={classes.link}>About</Link>
                     </Group>
 
-                    <Group visibleFrom='sm'>
-                        <ActionIcon variant='light'>
-                            <IconSun />
+                    <Group>
+                        <ActionIcon variant='outline' color={darkMode && 'orange'}>
+                            {darkMode? <IconSun /> : <IconMoonStars /> }
                         </ActionIcon>
-                        <Link href='/contact'><Button variant='gradient' gradient={{ from: 'pink', to: 'orange' }}>Contact</Button></Link>
+                        <Container visibleFrom='md' p={0} m={0}>
+                            <Link href='/contact'><Button variant='gradient' gradient={{ from: 'pink', to: 'orange' }}>Contact</Button></Link>
+                        </Container>
                     </Group>
 
                     <Burger opened={drawerOpened} onClick={toggleDrawer} hiddenFrom='sm' />

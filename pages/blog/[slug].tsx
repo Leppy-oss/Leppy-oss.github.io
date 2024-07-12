@@ -7,6 +7,7 @@ import { serialize } from 'next-mdx-remote/serialize';
 import { NextSeo } from 'next-seo';
 import Image from 'next/image';
 import Link from 'next/link';
+import { CodeHighlight } from '@mantine/code-highlight';
 
 import {
   ActionIcon,
@@ -16,7 +17,6 @@ import {
   Table as ReactTable,
   Title,
 } from '@mantine/core';
-// import { Prism } from '@mantine/prism';
 
 import { IconArrowNarrowLeft } from '@tabler/icons-react';
 
@@ -40,22 +40,17 @@ const components: MDXComponents = {
   code: (props: any) => <Code {...props} />,
   pre: (props: any) => {
     const matches = (props.children.props.className || '').match(
-      /language-(?<lang>.*)/
+      /language-(.*)/
     );
 
-    return (<div></div>
-    /*
-      <Prism
-        language={
-          matches && matches.groups && matches.groups.lang
-            ? matches.groups.lang
-            : ''
-        }
+    const lang = matches ? matches[1] : undefined;
+
+    return (
+      <CodeHighlight
+        language={lang}
+        code={props.children.props.children}
         mb={20}
-      >
-        {props.children.props.children}
-      </Prism>
-      */
+      />
     );
   },
   h1: (props: any) => <Title order={1} {...props} />,
@@ -73,6 +68,7 @@ export default function PostPage({ post }: { post: MDXPost }) {
       <NextSeo title={post.meta.title} description={post.meta.excerpt} />
       <Group>
         <ActionIcon
+          variant='light'
           component={Link}
           href='/blog'
           aria-label='back to blog list'
