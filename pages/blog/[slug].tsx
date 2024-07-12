@@ -91,7 +91,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
     mdxOptions: {
       rehypePlugins: [
         rehypeSlug,
-        [rehypeAutolinkHeadings, { behavior: 'wrap' }],
+        [rehypeAutolinkHeadings, { behavior: 'wrap', properties: { className: 'autolink-heading' } }],
       ],
     },
   });

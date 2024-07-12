@@ -1,5 +1,5 @@
-import Layout from "../components/layout";
-import { MantineProvider } from '@mantine/core'
+import Layout from '../components/layout';
+import { MantineProvider, useMantineColorScheme } from '@mantine/core'
 
 import '../styles/global.css';
 import '@mantine/core/styles.css';
@@ -10,13 +10,10 @@ import '@fontsource/roboto/700.css';
 
 import Aos from 'aos';
 import 'aos/dist/aos.css';
-import { useEffect } from "react";
-import GsapProvider from "../lib/gsap-provider";
-import { useToggle } from "@mantine/hooks";
+import { useEffect } from 'react';
+import GsapProvider from '../lib/gsap-provider';
 
 function MyApp({ Component, pageProps }) {
-    const [darkMode, toggleDarkMode] = useToggle([false, true]);
-
     useEffect(() => {
         Aos.init({
             duration: 800,
@@ -25,7 +22,7 @@ function MyApp({ Component, pageProps }) {
     }, []);
 
     return (
-        <MantineProvider withGlobalStyles withNormalizeCSS defaultColorScheme='light'>
+        <MantineProvider withGlobalStyles withNormalizeCSS >
             <GsapProvider>
                 <Layout>
                     <Component {...pageProps} />

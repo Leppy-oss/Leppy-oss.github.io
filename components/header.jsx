@@ -32,7 +32,7 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
-export function Header({ darkMode }) {
+export function Header({ colorScheme, setColorScheme }) {
     const [drawerOpened, { toggle: toggleDrawer, close: closeDrawer }] = useDisclosure(false);
     const [linksOpened, { toggle: toggleLinks }] = useDisclosure(false);
     const theme = useMantineTheme();
@@ -154,8 +154,10 @@ export function Header({ darkMode }) {
                     </Group>
 
                     <Group>
-                        <ActionIcon variant='outline' color={darkMode && 'orange'}>
-                            {darkMode? <IconSun /> : <IconMoonStars /> }
+                        <ActionIcon variant='outline' color={'orange'} onClick={() => {
+                            setColorScheme(colorScheme == 'dark'? 'light' : 'dark')
+                        }}>
+                            {colorScheme == 'dark' ? <IconSun /> : <IconMoonStars />}
                         </ActionIcon>
                         <Container visibleFrom='md' p={0} m={0}>
                             <Link href='/contact'><Button variant='gradient' gradient={{ from: 'pink', to: 'orange' }}>Contact</Button></Link>
