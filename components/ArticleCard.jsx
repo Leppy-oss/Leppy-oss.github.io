@@ -12,7 +12,7 @@ import {
 import { IconHeart, IconBookmark, IconShare } from '@tabler/icons-react';
 import classes from '../styles/ArticleCard.module.css';
 
-export default function ArticleCard({  }) {
+export default function ArticleCard({ link, title, description, author, image, category }) {
     const theme = useMantineTheme();
 
     return (

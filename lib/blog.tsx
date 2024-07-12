@@ -1,8 +1,8 @@
-import fs from "fs";
-import { sync } from "glob";
-import matter from "gray-matter";
-import normalize from "normalize-path";
-import path from "path";
+import fs from 'fs';
+import { sync } from 'glob';
+import matter from 'gray-matter';
+import normalize from 'normalize-path';
+import path from 'path';
 
 export interface PostMeta {
     excerpt: string;
@@ -24,7 +24,7 @@ interface Post {
 }
 
 /* Joining the current working directory with the `posts` directory. */
-const POSTS_PATH = path.join(process.cwd(), "posts");
+const POSTS_PATH = path.join(process.cwd(), 'posts');
 
 /**
  * It takes all the files in the `posts` directory, splits the file path into an array, grabs the last
@@ -36,9 +36,9 @@ export const getSlugs = (): string[] => {
     const paths = sync(normalize(`${POSTS_PATH}/*.mdx`));
 
     return paths.map((filePath) => {
-        const parts = filePath.split("/");
+        const parts = filePath.split('/');
         const fileName = parts[parts.length - 1];
-        const [slug] = fileName.split(".");
+        const [slug] = fileName.split('.');
         return slug;
     });
 };
@@ -57,7 +57,7 @@ export const getPostFromSlug = (slug: string): Post => {
         content,
         meta: {
             slug,
-            excerpt: data.excerpt ?? "",
+            excerpt: data.excerpt ?? '',
             title: data.title ?? slug,
             tags: (data.tags ?? []).sort(),
             date: (data.date ?? new Date()).toString(),
