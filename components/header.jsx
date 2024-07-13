@@ -154,8 +154,8 @@ export function Header({ colorScheme, setColorScheme }) {
                     </Group>
 
                     <Group>
-                        <ActionIcon variant='outline' color={'orange'} onClick={() => {
-                            setColorScheme(colorScheme == 'dark'? 'light' : 'dark')
+                        <ActionIcon variant='outline' color={colorScheme == 'dark' && 'orange'} onClick={() => {
+                            setColorScheme(colorScheme == 'dark' ? 'light' : 'dark')
                         }}>
                             {colorScheme == 'dark' ? <IconSun /> : <IconMoonStars />}
                         </ActionIcon>
