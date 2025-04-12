@@ -12,6 +12,10 @@
     top: var(--static-space-64);
 }
 
+.languageFlex {
+    max-width: 100px;
+}
+
 @media (--s) {
     .avatar {
         top: auto;
@@ -23,5 +27,9 @@
 
     .blockAlign {
         align-self: center;
+    }
+
+    .languageFlex {
+        width: 500px;
     }
 }

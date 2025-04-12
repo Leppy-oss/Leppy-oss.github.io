@@ -1,3 +1,4 @@
+import "@/app/global.scss";
 import "@/once-ui/styles/index.scss";
 import "@/once-ui/tokens/index.scss";
 
@@ -9,7 +10,7 @@ import { baseURL, effects, style } from "@/app/resources";
 import { Inter } from "next/font/google";
 import { Source_Code_Pro } from "next/font/google";
 
-import { person, home } from "@/app/resources/content";
+import { info, home } from "@/app/resources/content";
 import { Background, Column, Flex, ToastProvider } from "@/once-ui/components";
 
 export async function generateMetadata() {
@@ -18,10 +19,10 @@ export async function generateMetadata() {
     title: home.title,
     description: home.description,
     openGraph: {
-      title: `${person.firstName}'s Portfolio`,
+      title: "Ryan Xu",
       description: "Portfolio website showcasing my work.",
       url: baseURL,
-      siteName: `${person.firstName}'s Portfolio`,
+      siteName: "Ryan Xu",
       locale: "en_US",
       type: "website",
     },
@@ -50,8 +51,8 @@ type FontConfig = {
 };
 
 /*
-	Replace with code for secondary and tertiary fonts
-	from https://once-ui.com/customize
+  Replace with code for secondary and tertiary fonts
+  from https://once-ui.com/customize
 */
 const secondary: FontConfig | undefined = undefined;
 const tertiary: FontConfig | undefined = undefined;

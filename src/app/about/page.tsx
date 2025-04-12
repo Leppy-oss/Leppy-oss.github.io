@@ -13,7 +13,7 @@ import {
 import { baseURL } from "@/app/resources";
 import TableOfContents from "@/components/about/TableOfContents";
 import styles from "@/components/about/about.module.scss";
-import { person, about, social } from "@/app/resources/content";
+import { info, about, social } from "@/app/resources/content";
 
 export async function generateMetadata() {
   const title = about.title;
@@ -76,11 +76,11 @@ export default function About() {
           __html: JSON.stringify({
             "@context": "https://schema.org",
             "@type": "Person",
-            name: person.name,
-            jobTitle: person.role,
+            name: info.name,
+            jobTitle: info.role,
             description: about.intro.description,
             url: `https://${baseURL}/about`,
-            image: `${baseURL}/images/${person.avatar}`,
+            image: `${baseURL}/images/${info.avatar}`,
             sameAs: social
               .filter((item) => item.link && !item.link.startsWith("mailto:")) // Filter out empty links and email links
               .map((item) => item.link),
@@ -107,21 +107,20 @@ export default function About() {
         {about.avatar.display && (
           <Column
             className={styles.avatar}
-            minWidth="160"
             paddingX="l"
             paddingBottom="xl"
             gap="m"
             flex={3}
             horizontal="center"
           >
-            <Avatar src={person.avatar} size="xl" />
+            <Avatar src={info.avatar} size="xl" />
             <Flex gap="8" vertical="center">
               <Icon onBackground="accent-weak" name="globe" />
-              {person.location}
+              {info.location}
             </Flex>
-            {person.languages.length > 0 && (
-              <Flex wrap gap="8">
-                {person.languages.map((language, index) => (
+            {info.languages.length > 0 && (
+              <Flex wrap gap="8" maxWidth={15} className="contentCenter">
+                {info.languages.map((language, index) => (
                   <Tag key={index} size="l">
                     {language}
                   </Tag>
@@ -164,39 +163,39 @@ export default function About() {
               </Flex>
             )}
             <Heading className={styles.textAlign} variant="display-strong-xl">
-              {person.name}
+              {info.name}
             </Heading>
             <Text
               className={styles.textAlign}
               variant="display-default-xs"
               onBackground="neutral-weak"
             >
-              {person.role}
+              {info.role}
             </Text>
             {social.length > 0 && (
               <Flex className={styles.blockAlign} paddingTop="20" paddingBottom="8" gap="8" wrap horizontal="center" fitWidth>
                 {social.map(
                   (item) =>
                     item.link && (
-                        <>
-                            <Button
-                                className="s-flex-hide"
-                                key={item.name}
-                                href={item.link}
-                                prefixIcon={item.icon}
-                                label={item.name}
-                                size="s"
-                                variant="secondary"
-                            />
-                            <IconButton
-                                className="s-flex-show"
-                                size="l"
-                                key={`${item.name}-icon`}
-                                href={item.link}
-                                icon={item.icon}
-                                variant="secondary"
-                            />
-                        </>
+                      <>
+                        <Button
+                          className="s-flex-hide"
+                          key={item.name}
+                          href={item.link}
+                          prefixIcon={item.icon}
+                          label={item.name}
+                          size="s"
+                          variant="secondary"
+                        />
+                        <IconButton
+                          className="s-flex-show"
+                          size="l"
+                          key={`${item.name}-icon`}
+                          href={item.link}
+                          icon={item.icon}
+                          variant="secondary"
+                        />
+                      </>
                     ),
                 )}
               </Flex>

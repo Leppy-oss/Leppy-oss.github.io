@@ -4,7 +4,7 @@ import { Heading, Flex, Text, Button, Avatar, RevealFx, Arrow, Column } from "@/
 import { Projects } from "@/components/work/Projects";
 
 import { baseURL, routes } from "@/app/resources";
-import { home, about, person, newsletter } from "@/app/resources/content";
+import { home, about, info, newsletter } from "@/app/resources/content";
 import { Mailchimp } from "@/components";
 import { Posts } from "@/components/blog/Posts";
 
@@ -53,10 +53,10 @@ export default function Home() {
             image: `${baseURL}/og?title=${encodeURIComponent(home.title)}`,
             publisher: {
               "@type": "Person",
-              name: person.name,
+              name: info.name,
               image: {
                 "@type": "ImageObject",
-                url: `${baseURL}${person.avatar}`,
+                url: `${baseURL}${info.avatar}`,
               },
             },
           }),
@@ -87,7 +87,7 @@ export default function Home() {
                 {about.avatar.display && (
                   <Avatar
                     style={{ marginLeft: "-0.75rem", marginRight: "0.25rem" }}
-                    src={person.avatar}
+                    src={info.avatar}
                     size="m"
                   />
                 )}

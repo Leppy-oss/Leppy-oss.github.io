@@ -9,7 +9,7 @@ export {
   baseURL,
 } from "@/app/resources/config";
 export {
-  person,
+  info,
   social,
   newsletter,
   home,

@@ -1,20 +1,21 @@
 import { InlineCode } from "@/once-ui/components";
 
-const person = {
-  firstName: "Selene",
-  lastName: "Yu",
+const info = {
+  firstName: "Ryan",
+  lastName: "Xu",
   get name() {
     return `${this.firstName} ${this.lastName}`;
   },
-  role: "Design Engineer",
+  role: "Student, Leader, & Developer",
   avatar: "/images/avatar.jpg",
-  location: "Asia/Jakarta", // Expecting the IANA time zone identifier, e.g., 'Europe/Vienna'
-  languages: ["English", "Bahasa"], // optional: Leave the array empty if you don't want to display languages
+  location: "Dallas, Texas", // Expecting the IANA time zone identifier, e.g., 'Europe/Vienna'
+  timezone: "America/Chicago",
+  languages: ["English", "Mandarin", "Deutsch"], // optional: Leave the array empty if you don't want to display languages
 };
 
 const newsletter = {
-  display: true,
-  title: <>Subscribe to {person.firstName}'s Newsletter</>,
+  display: false,
+  title: <>Subscribe to {info.firstName}'s Newsletter</>,
   description: (
     <>
       I occasionally write about design, technology, and share thoughts on the intersection of
@@ -29,12 +30,12 @@ const social = [
   {
     name: "GitHub",
     icon: "github",
-    link: "https://github.com/once-ui-system/nextjs-starter",
+    link: "https://github.com/Leppy-oss",
   },
   {
     name: "LinkedIn",
     icon: "linkedin",
-    link: "https://www.linkedin.com/company/once-ui/",
+    link: "https://www.linkedin.com/in/leppy-roycks-66a596241/",
   },
   {
     name: "X",
@@ -44,19 +45,19 @@ const social = [
   {
     name: "Email",
     icon: "email",
-    link: "mailto:example@gmail.com",
+    link: "tyryanosaur@gmail.com",
   },
 ];
 
 const home = {
   label: "Home",
-  title: `${person.name}'s Portfolio`,
-  description: `Portfolio website showcasing my work as a ${person.role}`,
-  headline: <>Design engineer and builder</>,
+  title: `${info.name}`,
+  description: `Portfolio website showcasing my work as a ${info.role.toLowerCase()}`,
+  headline: <>Hey there, I'm Ryan!</>,
   subline: (
     <>
-      I'm Selene, a design engineer at <InlineCode>FLY</InlineCode>, where I craft intuitive
-      <br /> user experiences. After hours, I build my own projects.
+      I'm an enthusiastic {info.role.toLowerCase()} based in {info.location}. I'm passionate about creating projects and
+      experiences that serve humanity. Welcome to my portfolio!
     </>
   ),
 };
@@ -64,7 +65,7 @@ const home = {
 const about = {
   label: "About",
   title: "About me",
-  description: `Meet ${person.name}, ${person.role} from ${person.location}`,
+  description: `Meet ${info.name}, a ${info.role.toLowerCase()} from ${info.location}`,
   tableOfContent: {
     display: true,
     subItems: false,
@@ -81,7 +82,7 @@ const about = {
     title: "Introduction",
     description: (
       <>
-        Selene is a Jakarta-based design engineer with a passion for transforming complex challenges
+        I am a Dallas-based design engineer with a passion for transforming complex challenges
         into simple, elegant design solutions. Her work spans digital interfaces, interactive
         experiences, and the convergence of design and technology.
       </>
@@ -190,7 +191,7 @@ const about = {
 const blog = {
   label: "Blog",
   title: "Writing about design and tech...",
-  description: `Read what ${person.name} has been up to recently`,
+  description: `Read what ${info.name} has been up to recently`,
   // Create new blog posts by adding a new .mdx file to app/blog/posts
   // All posts will be listed on the /blog route
 };
@@ -198,7 +199,7 @@ const blog = {
 const work = {
   label: "Work",
   title: "My projects",
-  description: `Design and dev projects by ${person.name}`,
+  description: `Design and dev projects by ${info.name}`,
   // Create new project pages by adding a new .mdx file to app/blog/posts
   // All projects will be listed on the /home and /work routes
 };
@@ -206,7 +207,7 @@ const work = {
 const gallery = {
   label: "Gallery",
   title: "My photo gallery",
-  description: `A photo collection by ${person.name}`,
+  description: `A photo collection by ${info.name}`,
   // Images from https://pexels.com
   images: [
     {
@@ -282,4 +283,4 @@ const gallery = {
   ],
 };
 
-export { person, social, newsletter, home, about, blog, work, gallery };
+export { info, social, newsletter, home, about, blog, work, gallery };

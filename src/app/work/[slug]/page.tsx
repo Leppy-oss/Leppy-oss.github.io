@@ -3,7 +3,7 @@ import { CustomMDX } from "@/components/mdx";
 import { getPosts } from "@/app/utils/utils";
 import { AvatarGroup, Button, Column, Flex, Heading, SmartImage, Text } from "@/once-ui/components";
 import { baseURL } from "@/app/resources";
-import { person } from "@/app/resources/content";
+import { info } from "@/app/resources/content";
 import { formatDate } from "@/app/utils/formatDate";
 import ScrollToHash from "@/components/ScrollToHash";
 
@@ -72,7 +72,7 @@ export default function Project({ params }: WorkParams) {
 
   const avatars =
     post.metadata.team?.map((person) => ({
-      src: person.avatar,
+      src: info.avatar,
     })) || [];
 
   return (
@@ -94,7 +94,7 @@ export default function Project({ params }: WorkParams) {
             url: `https://${baseURL}/work/${post.slug}`,
             author: {
               "@type": "Person",
-              name: person.name,
+              name: info.name,
             },
           }),
         }}

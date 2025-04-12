@@ -1,0 +1,13 @@
+.contentCenter {
+    justify-content: center;
+}
+
+.mobileUncenter {
+    justify-content: center;
+}
+
+@media (max-width: 639px) {
+    .mobileUncenter {
+        justify-content: flex-start;
+    }
+}

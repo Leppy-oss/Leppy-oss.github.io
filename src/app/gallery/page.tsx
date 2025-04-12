@@ -1,7 +1,7 @@
 import { Flex } from "@/once-ui/components";
 import MasonryGrid from "@/components/gallery/MasonryGrid";
 import { baseURL } from "@/app/resources";
-import { gallery, person } from "@/app/resources/content";
+import { gallery, info } from "@/app/resources/content";
 
 export async function generateMetadata() {
   const title = gallery.title;
@@ -52,10 +52,10 @@ export default function Gallery() {
             })),
             author: {
               "@type": "Person",
-              name: person.name,
+              name: info.name,
               image: {
                 "@type": "ImageObject",
-                url: `${baseURL}${person.avatar}`,
+                url: `${baseURL}${info.avatar}`,
               },
             },
           }),
