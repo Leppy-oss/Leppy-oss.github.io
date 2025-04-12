@@ -13,7 +13,6 @@
     "@leppy-oss/portfolio": "file:",
     "@mdx-js/loader": "^3.1.0",
     "@next/mdx": "^14.2.16",
-    "@once-ui-system/magic-portfolio": "file:",
     "classnames": "^2.5.1",
     "cookie": "^1.0.1",
     "gray-matter": "^4.0.3",
