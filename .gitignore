@@ -42,5 +42,6 @@ pnpm-debug.log*
 # environment variables
 .env
 .env.production
+.env*.local
 
 pnpm-lock.yaml
