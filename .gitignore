@@ -1,3 +1,30 @@
+ dependencies
+/node_modules
+/.pnp
+.pnp.js
+.yarn/install-state.gz
+
+# vercel
+.vercel
+
+# typescript
+*.tsbuildinfo
+next-env.d.ts
+
+# testing
+/coverage
+
+# next.js
+/.next/
+/out/
+
+# production
+/build
+
+# misc
+.DS_Store
+*.pem
+
 # build output
 dist/
 .output/
@@ -16,9 +43,4 @@ pnpm-debug.log*
 .env
 .env.production
 
-# macOS-specific files
-.DS_Store
-
 pnpm-lock.yaml
-
-.astro
