@@ -13,6 +13,7 @@ import {
   ActionIcon,
   Anchor,
   Code,
+  Container,
   Group,
   Table as ReactTable,
   Title,
@@ -44,10 +45,11 @@ const components: MDXComponents = {
     );
 
     const lang = matches ? matches[1] : undefined;
+    console.log(typeof props.children.props.children);
 
     return (
       <CodeHighlight
-        language={lang}
+        language='tsx'
         code={props.children.props.children}
         mb={20}
       />
@@ -64,7 +66,7 @@ const components: MDXComponents = {
 
 export default function PostPage({ post }: { post: MDXPost }) {
   return (
-    <>
+    <Container>
       <NextSeo title={post.meta.title} description={post.meta.excerpt} />
       <Group>
         <ActionIcon
@@ -80,7 +82,7 @@ export default function PostPage({ post }: { post: MDXPost }) {
       </Group>
 
       <MDXRemote {...post.source} components={components} />
-    </>
+    </Container>
   );
 }
 
