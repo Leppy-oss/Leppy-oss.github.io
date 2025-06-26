@@ -10,7 +10,7 @@ export const DATA = {
   description:
     "I'm an enthusiastic student, leader, & engineer based in Dallas, Texas. Welcome to my portfolio!",
   summary: "I'm passionate about creating projects and experiences with human impacts. I'm especially drawn to projects that require not just technical skill but also clear thinking and communication. In all of my work, I aim to translate complex ideas into solutions people can understand and use.",
-  avatarUrl: "/avatar.jpg",
+  avatarUrl: "/leppy-oss.jpg",
   skills: [
     "PyTorch",
     "TensorFlow",
@@ -34,7 +34,6 @@ export const DATA = {
   ],
   contact: {
     email: "tyryanosaur@gmail.com",
-    tel: "+123456789",
     social: {
       GitHub: {
         name: "GitHub",
@@ -80,7 +79,7 @@ export const DATA = {
       badges: [],
       location: "Austin, TX",
       title: "Backend Team Lead",
-      logoUrl: "/beatnews.png",
+      logoUrl: "/beat-news.png",
       start: "July 2024",
       end: "October 2024",
       description: "Created backend system for ",
