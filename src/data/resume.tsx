@@ -20,9 +20,9 @@ export const DATA = {
     "Node.js",
     "MongoDB",
     "Python",
-    "C++",
     "TypeScript",
     "Java/Kotlin",
+    "C++",
     "MATLAB",
     "LabVIEW",
     "LaTeX",
@@ -74,7 +74,18 @@ export const DATA = {
 
   work: [
     {
-      company: "BeatNews",
+      organization: "Technicbots 8565",
+      href: "https://technicbots.com/",
+      badges: [],
+      location: "Dallas, TX",
+      title: "Engineering Captain",
+      logoUrl: "/technicbots.jpg",
+      start: "May 2022",
+      end: "Present",
+      description: "Served as engineering "
+    },
+    {
+      organization: "BeatNews",
       href: "https://www.beatnews.ai/",
       badges: [],
       location: "Austin, TX",
@@ -82,32 +93,18 @@ export const DATA = {
       logoUrl: "/beat-news.png",
       start: "July 2024",
       end: "October 2024",
-      description: "Created backend system for ",
-      ph: "Implemented the Bitcoin discreet log contract (DLC) protocol specifications as an open source Typescript SDK. Dockerized all microservices and setup production kubernetes cluster. Architected a data lake using AWS S3 and Athena for historical backtesting of bitcoin trading strategies. Built a mobile app using react native and typescript.",
+      description: "Designed and created backend system for beat reporting agency with MongoDB, Next.js server, and Typescript. Created custom Mongoose schemas, authorization system with OAuth 2.0, and integration with AI-powered web-scraping. Additionally, designed responsive frontend UI with Next.js and Mantine."
     },
     {
-      company: "Nvidia",
-      href: "https://nvidia.com/",
-      badges: [],
-      location: "Santa Clara, CA",
-      title: "Software Engineer",
-      logoUrl: "/nvidia.png",
-      start: "January 2020",
-      end: "April 2020",
-      description:
-        "Architected and wrote the entire MVP of the GeForce Now Cloud Gaming internal admin and A/B testing dashboard using React, Redux, TypeScript, and Python.",
-    },
-    {
-      company: "Splunk",
+      organization: "Research",
       href: "https://splunk.com",
       badges: [],
-      location: "San Jose, CA",
-      title: "Software Engineer",
-      logoUrl: "/splunk.svg",
+      location: "University of Texas at Dallas",
+      title: "Independent Research + UTD Lab Lead",
+      logoUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-RWG52mgsNmbA7ebT_4nrD9031Dm8ALmjwg&s",
       start: "January 2019",
       end: "April 2019",
-      description:
-        "Co-developed a prototype iOS app with another intern in Swift for the new Splunk Phantom security orchestration product (later publicly demoed and launched at .conf annual conference in Las Vegas). Implemented a realtime service for the iOS app in Django (Python) and C++; serialized data using protobufs transmitted over gRPC resulting in an approximate 500% increase in data throughput.",
+      description: "Co-developed a prototype iOS app with another intern in Swift for the new Splunk Phantom security orchestration product (later publicly demoed and launched at .conf annual conference in Las Vegas). Implemented a realtime service for the iOS app in Django (Python) and C++; serialized data using protobufs transmitted over gRPC resulting in an approximate 500% increase in data throughput.",
     }
   ],
   education: [
@@ -115,7 +112,7 @@ export const DATA = {
       school: "Plano West Senior High School",
       href: "https://www.pisd.edu/pwsh",
       degree: "insert academic qualifications here",
-      logoUrl: "https://s3-us-west-2.amazonaws.com/assets-prod-bvmsports/bvmsports/wp-content/uploads/2021/04/PWHS-Logo.png",
+      logoUrl: "/pwsh.png",
       start: "2024",
       end: "Present",
     },
@@ -244,7 +241,7 @@ export const DATA = {
         "https://pub-83c5db439b40468498f97946200806f7.r2.dev/automatic-chat.mp4",
     },
   ],
-  hackathons: [
+  milestones: [
     {
       title: "Hack Western 5",
       dates: "November 23rd - 25th, 2018",
