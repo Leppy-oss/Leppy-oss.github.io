@@ -82,7 +82,7 @@ export const DATA = {
       logoUrl: "/technicbots.jpg",
       start: "May 2022",
       end: "Present",
-      description: "Served as engineering "
+      description: "Led robotics team through biweekly GitHub code reviews, weekly meetings, and daily check-ins. Utilized Gantt charts to track robot milestones. Researched and implemented graduate-level control theory algorithms, e.g. Extended Kalman Filter & Linear Quadratic Regulator. Created technical documentation for Engineering Portfolio and open-source software for hundreds of community members."
     },
     {
       organization: "BeatNews",
