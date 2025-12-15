@@ -6,7 +6,7 @@ Hi! 👋 Welcome to my portfolio. I'm excited to show you around - just click <a
 
 <ul>
   <li>🍃 Node.js</li>
-  <li>▲ Next.js</li>
+  <li>📚 TanStack Router</li>
   <li>👁️ Shadcn</li>
   <li>💨 Tailwind</li>
   <li>⬇️ MDX</li>
