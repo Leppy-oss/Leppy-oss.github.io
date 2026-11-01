@@ -5,6 +5,7 @@ import Container from "@components/Container.astro";
 import FormattedDate from "@components/FormattedDate.astro";
 import BackToPrev from "@components/BackToPrev.astro";
 import { getEntries, readingTime } from "@lib/utils";
+import { blogPosting } from "@schema";
 
 export async function getStaticPaths() {
   const posts = await getEntries("blog");
@@ -22,7 +23,12 @@ const { post } = Astro.props;
 const { Content } = await render(post);
 ---
 
-<PageLayout title={post.data.title} description={post.data.description}>
+<PageLayout
+  title={post.data.title}
+  description={post.data.description}
+  article={{ publishedTime: post.data.date }}
+  schema={[blogPosting(post)]}
+>
   <Container>
     <div class="animate">
       <BackToPrev href="/blog">
@@ -39,9 +45,9 @@ const { Content } = await render(post);
           {readingTime(post.body ?? "")}
         </div>
       </div>
-      <div class="animate text-2xl font-semibold text-black dark:text-white">
+      <h1 class="animate text-2xl font-semibold text-black dark:text-white">
         {post.data.title}
-      </div>
+      </h1>
     </div>
     <article class="animate">
       <Content />

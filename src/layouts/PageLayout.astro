@@ -1,21 +1,20 @@
 ---
+import type { ComponentProps } from "astro/types";
 import Head from "@components/Head.astro";
 import Header from "@components/Header.astro";
 import Footer from "@components/Footer.astro";
 import { SITE } from "@consts";
 
-type Props = {
-  title: string;
-  description: string;
-};
+type Props = ComponentProps<typeof Head>;
 
-const { title, description } = Astro.props;
+const { title, ...rest } = Astro.props;
+const fullTitle = title === SITE.NAME ? title : `${title} | ${SITE.NAME}`;
 ---
 
 <!doctype html>
 <html lang="en">
   <head>
-    <Head title={`${title} | ${SITE.NAME}`} description={description} />
+    <Head title={fullTitle} {...rest} />
   </head>
   <body>
     <Header />

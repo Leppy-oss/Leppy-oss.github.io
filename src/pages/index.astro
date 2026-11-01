@@ -8,6 +8,7 @@ import Headshot from "@components/Headshot.astro";
 import Link from "@components/Link.astro";
 import { getEntries } from "@lib/utils";
 import { SITE, HOME, SOCIALS } from "@consts";
+import { PROFILE_PAGE } from "@schema";
 
 const blog = (await getEntries("blog")).slice(0, SITE.NUM_POSTS_ON_HOMEPAGE);
 const projects = (await getEntries("projects")).slice(
@@ -16,14 +17,14 @@ const projects = (await getEntries("projects")).slice(
 );
 ---
 
-<PageLayout title={HOME.TITLE} description={HOME.DESCRIPTION}>
+<PageLayout title={HOME.TITLE} description={HOME.DESCRIPTION} schema={[PROFILE_PAGE]}>
   <Container>
     <div class="space-y-12">
       <section class="flex flex-col-reverse gap-8 sm:flex-row sm:items-start sm:justify-between">
         <div class="space-y-4">
-          <h4 class="animate font-semibold text-black dark:text-white">
+          <h1 class="animate font-semibold text-black dark:text-white">
             Hi, I'm Ryan
-          </h4>
+          </h1>
           <article class="space-y-4">
             <p class="animate">
               I'm an undergraduate studying CS + Statistics at{" "}
@@ -75,7 +76,7 @@ const projects = (await getEntries("projects")).slice(
       </section>
 
       <!-- <section class="animate space-y-6"> -->
-      <!--   <h5 class="font-semibold text-black dark:text-white">Experience</h5> -->
+      <!--   <h2 class="font-semibold text-black dark:text-white">Experience</h2> -->
       <!--   <ul class="list-disc space-y-1.5 pl-5"> -->
       <!--     {EXPERIENCE.map((item) => ( -->
       <!--       <li> -->
@@ -98,9 +99,9 @@ const projects = (await getEntries("projects")).slice(
       {projects.length > 0 && (
         <section class="animate space-y-6">
           <div class="flex flex-wrap gap-y-2 items-center justify-between">
-            <h5 class="font-semibold text-black dark:text-white">
+            <h2 class="font-semibold text-black dark:text-white">
               Recent projects
-            </h5>
+            </h2>
             <Link href="/projects">See all projects</Link>
           </div>
           <ul class="flex flex-col gap-4">
@@ -113,19 +114,21 @@ const projects = (await getEntries("projects")).slice(
         </section>
       )}
 
-      <section class="animate space-y-6">
-        <div class="flex flex-wrap gap-y-2 items-center justify-between">
-          <h5 class="font-semibold text-black dark:text-white">Latest posts</h5>
-          <Link href="/blog">See all posts</Link>
-        </div>
-        <ul class="flex flex-col gap-4">
-          {blog.map((post) => (
-            <li>
-              <ArrowCard entry={post} />
-            </li>
-          ))}
-        </ul>
-      </section>
+      {blog.length > 0 && (
+        <section class="animate space-y-6">
+          <div class="flex flex-wrap gap-y-2 items-center justify-between">
+            <h2 class="font-semibold text-black dark:text-white">Latest posts</h2>
+            <Link href="/blog">See all posts</Link>
+          </div>
+          <ul class="flex flex-col gap-4">
+            {blog.map((post) => (
+              <li>
+                <ArrowCard entry={post} />
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
     </div>
   </Container>
 </PageLayout>

@@ -11,8 +11,8 @@ export const SITE: Site = {
 };
 
 export const HOME: Metadata = {
-  TITLE: "Home",
-  DESCRIPTION: "Personal website of Ryan Xu.",
+  TITLE: SITE.NAME,
+  DESCRIPTION: "Ryan Xu is an undergraduate studying Computer Science & Statistics at Harvard University, currently interested in embodied agents, 3D/4D computer vision, and robotics foundation models.",
 };
 
 export const BLOG: Metadata = {
