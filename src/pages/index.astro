@@ -17,7 +17,11 @@ const projects = (await getEntries("projects")).slice(
 );
 ---
 
-<PageLayout title={HOME.TITLE} description={HOME.DESCRIPTION} schema={[PROFILE_PAGE]}>
+<PageLayout
+  title={HOME.TITLE}
+  description={HOME.DESCRIPTION}
+  schema={[PROFILE_PAGE]}
+>
   <Container>
     <div class="space-y-12">
       <section class="flex flex-col-reverse gap-8 sm:flex-row sm:items-start sm:justify-between">
@@ -39,8 +43,8 @@ const projects = (await getEntries("projects")).slice(
               <Link href="https://www.societyforscience.org/regeneron-sts/2026-scholars/">
                 Regeneron STS Scholar
               </Link>{" "}
-              for my research on 3D part-assembly reconstruction. I conduct
-              research on embodied coding agents at the{" "}
+              for my project on 3D part-assembly reconstruction. I research
+              embodied agents and robotics at the{" "}
               <Link href="https://kempnerinstitute.harvard.edu/">
                 Harvard Kempner Institute
               </Link>
@@ -53,8 +57,8 @@ const projects = (await getEntries("projects")).slice(
                 policies, embodied co-design
               </li>
               <li>
-                Robotic foundation models: vision-language-action models (VLAs),
-                world action models (WAMs)
+                Robotics foundation models: vision-language-action models
+                (VLAs), world action models (WAMs)
               </li>
               <li>Computer vision: 3D and 4D scene reconstruction</li>
             </ul>
@@ -117,7 +121,9 @@ const projects = (await getEntries("projects")).slice(
       {blog.length > 0 && (
         <section class="animate space-y-6">
           <div class="flex flex-wrap gap-y-2 items-center justify-between">
-            <h2 class="font-semibold text-black dark:text-white">Latest posts</h2>
+            <h2 class="font-semibold text-black dark:text-white">
+              Latest posts
+            </h2>
             <Link href="/blog">See all posts</Link>
           </div>
           <ul class="flex flex-col gap-4">
