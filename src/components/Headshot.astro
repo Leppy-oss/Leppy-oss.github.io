@@ -5,6 +5,7 @@ import { SITE } from "@consts";
 
 type Props = {
   class?: string;
+  animateDelay?: number;
 }
 ---
 
@@ -15,6 +16,7 @@ type Props = {
     width={256}
     height={256}
     loading="eager"
+    data-animate-delay={Astro.props.animateDelay}
     class={cn("size-28 shrink-0 rounded-lg object-cover sm:size-32", Astro.props.class)}
   />
 )}

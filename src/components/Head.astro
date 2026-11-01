@@ -129,9 +129,10 @@ const appleTouchIcon = headshot && await getImage({ src: headshot, width: 180, h
     const animateElements = document.querySelectorAll(".animate");
 
     animateElements.forEach((element, index) => {
+      const delay = element.dataset.animateDelay;
       setTimeout(() => {
         element.classList.add("show");
-      }, index * 150);
+      }, delay ? Number(delay) : index * 150);
     });
   }
 
