@@ -1,0 +1,35 @@
+---
+import type { CollectionEntry } from "astro:content";
+import { Image } from "astro:assets";
+import GitHubLink from "@components/GitHubLink.astro";
+
+type Props = {
+  entry: CollectionEntry<"projects">;
+};
+
+const { title, description, thumbnail, demoURL, repoURL } = Astro.props.entry.data;
+---
+
+<div class="relative group flex flex-nowrap items-center gap-4 py-3 px-4 pr-10 rounded-lg border border-black/15 dark:border-white/20 hover:bg-black/5 dark:hover:bg-white/5 hover:text-black dark:hover:text-white transition-colors duration-300 ease-in-out">
+  {thumbnail && (
+    <Image src={thumbnail} alt="" width={96} height={96} class="size-12 shrink-0 rounded object-cover" />
+  )}
+  <div class="flex flex-col flex-1 min-w-0">
+    <div class="flex items-center gap-2 min-w-0 text-lg">
+      <a href={demoURL ?? repoURL} target="_blank" class="font-semibold truncate after:absolute after:inset-0 after:rounded-lg">
+        {title}
+      </a>
+      <GitHubLink href={repoURL} />
+    </div>
+    <div class="text-sm truncate">
+      {description}
+    </div>
+  </div>
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 24 24"
+    class="absolute top-1/2 right-2 -translate-y-1/2 -rotate-45 size-5 stroke-2 fill-none stroke-current">
+    <line x1="5" y1="12" x2="19" y2="12" class="translate-x-3 group-hover:translate-x-0 scale-x-0 group-hover:scale-x-100 transition-transform duration-300 ease-in-out" />
+    <polyline points="12 5 19 12 12 19" class="-translate-x-1 group-hover:translate-x-0 transition-transform duration-300 ease-in-out" />
+  </svg>
+</div>

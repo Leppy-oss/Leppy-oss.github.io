@@ -1,44 +1,55 @@
-import type { Site, Metadata, Socials } from "@types";
+import type { Site, Metadata, Socials, Experience } from "@types";
 
 export const SITE: Site = {
-  NAME: "Astro Nano",
-  EMAIL: "markhorn.dev@gmail.com",
+  NAME: "Ryan Xu",
+  URL: "https://ryanxu.me",
+  GITHUB_USERNAME: "Leppy-oss",
   NUM_POSTS_ON_HOMEPAGE: 3,
-  NUM_WORKS_ON_HOMEPAGE: 2,
   NUM_PROJECTS_ON_HOMEPAGE: 3,
+  PLAYGROUND_COLUMNS: 3,
+  PLAYGROUND_COLUMNS_MOBILE: 2,
 };
 
 export const HOME: Metadata = {
   TITLE: "Home",
-  DESCRIPTION: "Astro Nano is a minimal and lightweight blog and portfolio.",
+  DESCRIPTION: "Personal website of Ryan Xu.",
 };
 
 export const BLOG: Metadata = {
   TITLE: "Blog",
-  DESCRIPTION: "A collection of articles on topics I am passionate about.",
-};
-
-export const WORK: Metadata = {
-  TITLE: "Work",
-  DESCRIPTION: "Where I have worked and what I have done.",
+  DESCRIPTION: "A place for my notes.",
 };
 
 export const PROJECTS: Metadata = {
   TITLE: "Projects",
-  DESCRIPTION: "A collection of my projects, with links to repositories and demos.",
+  DESCRIPTION: "Selected projects I've worked on.",
+};
+
+export const PLAYGROUND: Metadata = {
+  TITLE: "Playground",
+  DESCRIPTION: "A collection of playful mini-projects.",
 };
 
 export const SOCIALS: Socials = [
-  { 
-    NAME: "twitter-x",
-    HREF: "https://twitter.com/markhorn_dev",
-  },
-  { 
+  {
     NAME: "github",
-    HREF: "https://github.com/markhorn-dev"
+    HREF: "https://github.com/Leppy-oss"
   },
-  { 
+  {
     NAME: "linkedin",
-    HREF: "https://www.linkedin.com/in/markhorn-dev",
+    HREF: "https://linkedin.com/in/rjxu"
+  },
+  {
+    NAME: "email",
+    HREF: "mailto:ryanxu@college.harvard.edu"
   }
+];
+
+export const EXPERIENCE: Experience = [
+  {
+    ROLE: "placeholder",
+    ORG: "placeholder",
+    HREF: "placeholder",
+    DATES: "placeholder"
+  },
 ];

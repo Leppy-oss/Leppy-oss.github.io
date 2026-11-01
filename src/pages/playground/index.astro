@@ -1,0 +1,41 @@
+---
+import PageLayout from "@layouts/PageLayout.astro";
+import Container from "@components/Container.astro";
+import PlaygroundTile from "@components/PlaygroundTile.astro";
+import { getEntries } from "@lib/utils";
+import { PLAYGROUND, SITE } from "@consts";
+
+const items = await getEntries("playground");
+---
+
+<PageLayout title={PLAYGROUND.TITLE} description={PLAYGROUND.DESCRIPTION}>
+  <Container>
+    <div class="space-y-10">
+      <div class="animate space-y-2">
+        <div class="font-semibold text-black dark:text-white">
+          Playground
+        </div>
+        <p>
+          {PLAYGROUND.DESCRIPTION}
+        </p>
+      </div>
+      {items.length > 0 ? (
+        <ul
+          class="animate grid grid-cols-[repeat(var(--columns-mobile),minmax(0,1fr))] gap-x-4 gap-y-6 sm:grid-cols-[repeat(var(--columns),minmax(0,1fr))]"
+          style={{
+            "--columns": SITE.PLAYGROUND_COLUMNS,
+            "--columns-mobile": SITE.PLAYGROUND_COLUMNS_MOBILE,
+          }}
+        >
+          {items.map((item) => (
+            <li>
+              <PlaygroundTile entry={item} />
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <p class="animate">Nothing here yet.</p>
+      )}
+    </div>
+  </Container>
+</PageLayout>

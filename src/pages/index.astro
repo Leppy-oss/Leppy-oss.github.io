@@ -1,157 +1,129 @@
 ---
-import { getCollection } from "astro:content";
 import Container from "@components/Container.astro";
 import PageLayout from "@layouts/PageLayout.astro";
 import ArrowCard from "@components/ArrowCard.astro";
+import ProjectCard from "@components/ProjectCard.astro";
+import ResumeRequest from "@components/ResumeRequest.astro";
+import Headshot from "@components/Headshot.astro";
 import Link from "@components/Link.astro";
-import { dateRange } from "@lib/utils";
+import { getEntries } from "@lib/utils";
 import { SITE, HOME, SOCIALS } from "@consts";
 
-const blog = (await getCollection("blog"))
-  .filter(post => !post.data.draft)
-  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
-  .slice(0,SITE.NUM_POSTS_ON_HOMEPAGE);
-
-const projects = (await getCollection("projects"))
-  .filter(project => !project.data.draft)
-  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
-  .slice(0,SITE.NUM_PROJECTS_ON_HOMEPAGE);
-
-const allwork = (await getCollection("work"))
-  .sort((a, b) => new Date(b.data.dateStart).valueOf() - new Date(a.data.dateStart).valueOf())
-  .slice(0,SITE.NUM_WORKS_ON_HOMEPAGE);
-
-const work = await Promise.all(
-  allwork.map(async (item) => {
-    const { Content } = await item.render();
-    return { ...item, Content };
-  })
+const blog = (await getEntries("blog")).slice(0, SITE.NUM_POSTS_ON_HOMEPAGE);
+const projects = (await getEntries("projects")).slice(
+  0,
+  SITE.NUM_PROJECTS_ON_HOMEPAGE,
 );
-
 ---
 
 <PageLayout title={HOME.TITLE} description={HOME.DESCRIPTION}>
   <Container>
-    <h4 class="animate font-semibold text-black dark:text-white">
-      Hi, I'm Nano <span class="text-xl">👋🏻</span> 
-    </h4>
-    <div class="space-y-16">
-      <section>
-        <article class="space-y-4">
-          <p class="animate">
-            I am a minimal, seo friendly, accessible portfolio and blog for developers. 
-            I am an even more lightweight version of my popular theme
-            <Link href="https://github.com/markhorn-dev/astro-sphere" aria-label="Astro Sphere on Github" external>
-              Astro Sphere
-            </Link>.
-            I have a lighthouse scores of 100 across the board for performance, 
-            accesibility, best practices and SEO.
-          </p>
-          <p class="animate">
-            I come packed with full type safety, a sitemap, an rss feed, markdown 
-            and mdx support (use components in your markdown) through astro integrations.
-            I am styled with tailwind and come preconfigured with light, dark and 
-            system/os theme preferences out of the box.
-          </p>
-          <p class="animate">
-            Visit
-            <Link href="https://github.com/markhorn-dev/astro-nano" aria-label="Astro Nano on Github" external>
-              Astro Nano on Github
-            </Link>
-            to fork the repository, read the docs or one-click deploy on Vercel or Netlify. 
-          </p>
-        </article>
+    <div class="space-y-12">
+      <section class="flex flex-col-reverse gap-8 sm:flex-row sm:items-start sm:justify-between">
+        <div class="space-y-4">
+          <h4 class="animate font-semibold text-black dark:text-white">
+            Hi, I'm Ryan
+          </h4>
+          <article class="space-y-4">
+            <p class="animate">
+              I'm an undergraduate studying CS + Statistics at{" "}
+              <Link href="https://college.harvard.edu/">
+                Harvard University
+              </Link>
+              . I grew up in Plano, Texas, where I led a world-class{" "}
+              <Link href="https://www.technicbots.com/">
+                competitive robotics team
+              </Link>{" "}
+              and was selected as a{" "}
+              <Link href="https://www.societyforscience.org/regeneron-sts/2026-scholars/">
+                Regeneron STS Scholar
+              </Link>{" "}
+              for my research on 3D part-assembly reconstruction. I conduct
+              research on embodied coding agents at the{" "}
+              <Link href="https://kempnerinstitute.harvard.edu/">
+                Harvard Kempner Institute
+              </Link>
+              .
+            </p>
+            <p class="animate mb-2!">My current interests include:</p>
+            <ul class="animate mt-2!">
+              <li>
+                Coding agents for embodied tasks: spatial reasoning, code as
+                policies, embodied co-design
+              </li>
+              <li>
+                Robotic foundation models: vision-language-action models (VLAs),
+                world action models (WAMs)
+              </li>
+              <li>Computer vision: 3D and 4D scene reconstruction</li>
+            </ul>
+          </article>
+          <ul class="animate flex flex-wrap gap-1">
+            {SOCIALS.map((social, index) => (
+              <li class="flex gap-1">
+                {index > 0 && <span>/</span>}
+                <Link href={social.HREF}>{social.NAME}</Link>
+              </li>
+            ))}
+            <li class="flex gap-1">
+              <span>/</span>
+              <ResumeRequest />
+            </li>
+          </ul>
+        </div>
+        <Headshot class="animate" />
       </section>
+
+      <!-- <section class="animate space-y-6"> -->
+      <!--   <h5 class="font-semibold text-black dark:text-white">Experience</h5> -->
+      <!--   <ul class="list-disc space-y-1.5 pl-5"> -->
+      <!--     {EXPERIENCE.map((item) => ( -->
+      <!--       <li> -->
+      <!--         <span class="text-black dark:text-white">{item.ROLE}</span>,{" "} -->
+      <!--         {item.HREF ? ( -->
+      <!--           <Link href={item.HREF} external> -->
+      <!--             {item.ORG} -->
+      <!--           </Link> -->
+      <!--         ) : ( -->
+      <!--           item.ORG -->
+      <!--         )} -->
+      <!--         <span class="ml-1 text-sm opacity-75 whitespace-nowrap"> -->
+      <!--           {item.DATES} -->
+      <!--         </span> -->
+      <!--       </li> -->
+      <!--     ))} -->
+      <!--   </ul> -->
+      <!-- </section> -->
+
+      {projects.length > 0 && (
+        <section class="animate space-y-6">
+          <div class="flex flex-wrap gap-y-2 items-center justify-between">
+            <h5 class="font-semibold text-black dark:text-white">
+              Recent projects
+            </h5>
+            <Link href="/projects">See all projects</Link>
+          </div>
+          <ul class="flex flex-col gap-4">
+            {projects.map((project) => (
+              <li>
+                <ProjectCard entry={project} />
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
 
       <section class="animate space-y-6">
         <div class="flex flex-wrap gap-y-2 items-center justify-between">
-          <h5 class="font-semibold text-black dark:text-white">
-            Latest posts
-          </h5>
-          <Link href="/blog">
-            See all posts
-          </Link>
+          <h5 class="font-semibold text-black dark:text-white">Latest posts</h5>
+          <Link href="/blog">See all posts</Link>
         </div>
         <ul class="flex flex-col gap-4">
-          {blog.map(post => (
+          {blog.map((post) => (
             <li>
               <ArrowCard entry={post} />
             </li>
           ))}
-        </ul>
-      </section>
-
-      <section class="animate space-y-6">
-        <div class="flex flex-wrap gap-y-2 items-center justify-between">
-          <h5 class="font-semibold text-black dark:text-white">
-            Work Experience
-          </h5>
-          <Link href="/work">
-            See all work
-          </Link>
-        </div>
-        <ul class="flex flex-col space-y-4">
-          {work.map(entry => (
-            <li>
-              <div class="text-sm opacity-75">
-                {dateRange(entry.data.dateStart, entry.data.dateEnd)}
-              </div>
-              <div class="font-semibold text-black dark:text-white">
-                {entry.data.company}
-              </div>
-              <div class="text-sm opacity-75">
-                {entry.data.role}
-              </div>
-              <article>
-                <entry.Content />
-              </article>
-            </li>
-          ))}
-        </ul>
-      </section>
-
-      <section class="animate space-y-6">
-        <div class="flex flex-wrap gap-y-2 items-center justify-between">
-          <h5 class="font-semibold text-black dark:text-white">
-            Recent projects
-          </h5>
-          <Link href="/projects">
-            See all projects
-          </Link>
-        </div>
-        <ul class="flex flex-col gap-4">
-          {projects.map(project => (
-            <li>
-              <ArrowCard entry={project} />
-            </li>
-          ))}
-        </ul>
-      </section>
-
-      <section class="animate space-y-4">
-        <h5 class="font-semibold text-black dark:text-white">
-          Let's Connect
-        </h5>
-        <article>
-          <p>
-            If you want to get in touch with me about something or just to say hi,
-            reach out on social media or send me an email.
-          </p>
-        </article>
-        <ul class="flex flex-wrap gap-2">
-          {SOCIALS.map(SOCIAL => (
-            <li class="flex gap-x-2 text-nowrap">
-              <Link href={SOCIAL.HREF} external aria-label={`${SITE.NAME} on ${SOCIAL.NAME}`}>
-                {SOCIAL.NAME}
-              </Link>
-              {"/"}
-            </li>
-          ))}
-          <li class="line-clamp-1">
-            <Link href={`mailto:${SITE.EMAIL}`} aria-label={`Email ${SITE.NAME}`}>
-              {SITE.EMAIL}
-            </Link>
-          </li>
         </ul>
       </section>
     </div>

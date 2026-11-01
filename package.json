@@ -1,41 +1,57 @@
 {
-  "name": "astro-nano",
+  "name": "portfolio",
   "type": "module",
   "version": "1.0.0",
+  "private": true,
+  "engines": {
+    "node": ">=22.23.4"
+  },
   "scripts": {
     "dev": "astro dev",
     "dev:network": "astro dev --host",
+    "sync": "astro sync",
     "build": "astro check && astro build",
     "preview": "astro preview",
     "preview:network": "astro preview --host",
+    "deploy": "gh workflow run deploy.yml",
     "astro": "astro",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix"
   },
   "dependencies": {
-    "@astrojs/check": "^0.9.4",
-    "@astrojs/mdx": "^8.1.0",
-    "@astrojs/rss": "^4.0.10",
-    "@astrojs/sitemap": "^3.2.1",
-    "@astrojs/tailwind": "^2.1.3",
-    "@fontsource/inter": "^5.0.17",
-    "@fontsource/lora": "^5.0.16",
-    "@tailwindcss/typography": "^0.5.4",
-    "@typescript-eslint/eslint-plugin": "^7.3.1",
-    "@typescript-eslint/parser": "^7.3.1",
-    "astro": "^7.4.1",
-    "clsx": "^2.1.0",
-    "eslint": "^8.57.0",
-    "eslint-plugin-astro": "^0.9.0",
-    "eslint-plugin-jsx-a11y": "^6.4.1",
+    "@astrojs/markdown-satteri": "^0.4.6",
+    "@astrojs/mdx": "^8.1.2",
+    "@astrojs/rss": "^4.0.19",
+    "@astrojs/sitemap": "^3.7.4",
+    "@fontsource/inter": "^5.3.0",
+    "@fontsource/lora": "^5.3.0",
+    "@tailwindcss/typography": "^0.5.20",
+    "@tailwindcss/vite": "^4.3.3",
+    "astro": "^7.4.4",
+    "clsx": "^2.1.1",
+    "satteri": "^0.10.5",
     "sharp": "^0.35.5",
-    "tailwind-merge": "^2.2.2",
-    "tailwindcss": "^3.4.1",
-    "typescript": "^5.4.2"
+    "tailwind-merge": "^3.7.0",
+    "tailwindcss": "^4.3.3",
+    "yaml": "^2.9.1"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.12",
+    "@astrojs/ts-plugin": "^1.10.12",
+    "@eslint/js": "^10.0.1",
+    "eslint": "^10.14.0",
+    "eslint-plugin-astro": "^3.2.1",
+    "globals": "^17.13.0",
+    "prettier": "^3.9.10",
+    "prettier-plugin-astro": "^1.1.2",
+    "typescript": "~6.0.3",
+    "typescript-eslint": "^8.72.1"
+  },
+  "overrides": {
+    "minimatch": "^11.0.3",
+    "postcss-selector-parser": "^7.1.7"
   },
   "allowScripts": {
-    "core-js-pure@3.51.0": true,
-    "fsevents@2.3.3": true,
-    "esbuild@0.15.18": true
+    "fsevents@2.3.3": true
   }
 }

@@ -1,6 +1,13 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-serif: "Lora", ui-serif, Georgia, serif;
+  --color-paper: #fbfbf9;
+}
 
 html {
   overflow-y: scroll;
@@ -19,14 +26,14 @@ body {
 body {
   @apply font-sans antialiased;
   @apply flex flex-col;
-  @apply bg-stone-100 dark:bg-stone-900;
+  @apply bg-paper dark:bg-stone-900;
   @apply text-black/50 dark:text-white/75;
 }
 
 header {
   @apply fixed top-0 left-0 right-0 z-50 py-5;
-  @apply bg-stone-100/75 dark:bg-stone-900/25;
-  @apply backdrop-blur-sm saturate-200;
+  @apply bg-paper/75 dark:bg-stone-900/25;
+  @apply backdrop-blur-sm backdrop-saturate-200;
 }
 
 main {
@@ -39,20 +46,34 @@ footer {
 
 article {
   @apply max-w-full prose dark:prose-invert prose-img:mx-auto prose-img:my-auto;
-  @apply prose-headings:font-semibold prose-p:font-serif;
-  @apply prose-headings:text-black prose-headings:dark:text-white;
+  @apply font-serif prose-headings:font-sans prose-headings:font-semibold;
+  @apply prose-headings:text-black dark:prose-headings:text-white;
+  @apply prose-code:before:content-none prose-code:after:content-none;
 }
 
 @layer utilities {
   article a {
-    @apply font-sans text-current underline underline-offset-2;
+    @apply text-current underline underline-offset-2;
     @apply decoration-black/15 dark:decoration-white/30;
     @apply transition-colors duration-300 ease-in-out;
   }
+
   article a:hover {
     @apply text-black dark:text-white;
     @apply decoration-black/25 dark:decoration-white/50;
   }
+}
+
+html.theme-switching::view-transition-old(root),
+html.theme-switching::view-transition-new(root) {
+  animation-duration: 200ms;
+  animation-timing-function: ease-in-out;
+}
+
+.external-icon {
+  @apply size-[0.85em] fill-none stroke-current stroke-2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
 }
 
 .animate {

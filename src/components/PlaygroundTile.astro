@@ -1,0 +1,30 @@
+---
+import type { CollectionEntry } from "astro:content";
+import { Image } from "astro:assets";
+import GitHubLink from "@components/GitHubLink.astro";
+
+type Props = {
+  entry: CollectionEntry<"playground">;
+};
+
+const { title, description, thumbnail, demoURL, repoURL } = Astro.props.entry.data;
+---
+
+<div class="relative group flex flex-col gap-2">
+  <div class="aspect-square overflow-hidden rounded-lg border border-black/15 dark:border-white/20 bg-black/5 dark:bg-white/5 group-hover:border-black/30 dark:group-hover:border-white/40 transition-colors duration-300 ease-in-out">
+    {thumbnail && (
+      <Image src={thumbnail} alt="" width={400} height={400} class="size-full object-cover" />
+    )}
+  </div>
+  <div class="flex flex-col">
+    <div class="flex items-center justify-between gap-2">
+      <a href={demoURL ?? repoURL} target="_blank" class="font-semibold truncate group-hover:text-black dark:group-hover:text-white transition-colors duration-300 ease-in-out after:absolute after:inset-0">
+        {title}
+      </a>
+      <GitHubLink href={repoURL} />
+    </div>
+    <div class="text-sm line-clamp-2">
+      {description}
+    </div>
+  </div>
+</div>

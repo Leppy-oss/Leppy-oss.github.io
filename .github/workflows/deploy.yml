@@ -1,0 +1,77 @@
+name: Deploy
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+  schedule:
+    - cron: "17 * * * *"
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    outputs:
+      key: ${{ steps.fingerprint.outputs.key }}
+      changed: ${{ steps.cache.outputs.cache-hit != 'true' }}
+    steps:
+      - id: fingerprint
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          repos=$(gh api graphql --paginate -F owner="$GITHUB_REPOSITORY_OWNER" -f query='
+            query ($owner: String!, $endCursor: String) {
+              user(login: $owner) {
+                repositories(first: 100, after: $endCursor, privacy: PUBLIC, ownerAffiliations: OWNER, isFork: false) {
+                  pageInfo { hasNextPage endCursor }
+                  nodes {
+                    name
+                    defaultBranchRef { target { oid } }
+                    portfolio: object(expression: "HEAD:portfolio.yaml") { oid }
+                  }
+                }
+              }
+            }' --jq '.data.user.repositories.nodes[] | select(.portfolio) | "\(.name)@\(.defaultBranchRef.target.oid)"')
+          echo "key=portfolio-$(echo "$repos $GITHUB_SHA" | sha256sum | cut -c1-16)" >> "$GITHUB_OUTPUT"
+      - id: cache
+        uses: actions/cache/restore@v6
+        with:
+          path: .portfolio
+          key: ${{ steps.fingerprint.outputs.key }}
+          lookup-only: true
+
+  build:
+    needs: check
+    if: github.event_name != 'schedule' || needs.check.outputs.changed == 'true'
+    runs-on: ubuntu-latest
+    env:
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      WEB3FORMS_ACCESS_KEY: ${{ secrets.WEB3FORMS_ACCESS_KEY }}
+    steps:
+      - uses: actions/checkout@v7
+      - uses: withastro/action@v6
+        with:
+          cache: false
+
+  deploy:
+    needs: [check, build]
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v5
+      - run: mkdir .portfolio && touch .portfolio/deployed
+      - uses: actions/cache/save@v6
+        with:
+          path: .portfolio
+          key: ${{ needs.check.outputs.key }}

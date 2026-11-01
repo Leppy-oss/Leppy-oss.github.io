@@ -1,6 +1,6 @@
 # Welcome
 
-Website files & stuff
+Website files & stuff, built on [Astro Nano](https://github.com/markhorn-dev/astro-nano).
 
 ## 💻 Commands
 
@@ -17,4 +17,4 @@ Website files & stuff
 | `npm run astro -- --help` | Get help using the Astro CLI                      |
 | `npm run lint`            | Run ESLint                                        |
 | `npm run lint:fix`        | Auto-fix ESLint issues                            |
-
+| `npm run deploy`          | Manually trigger gh pages deployment              |

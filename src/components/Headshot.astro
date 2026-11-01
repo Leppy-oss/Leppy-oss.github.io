@@ -1,0 +1,20 @@
+---
+import { Image } from "astro:assets";
+import { cn, headshot } from "@lib/utils";
+import { SITE } from "@consts";
+
+type Props = {
+  class?: string;
+}
+---
+
+{headshot && (
+  <Image
+    src={headshot}
+    alt={SITE.NAME}
+    width={256}
+    height={256}
+    loading="eager"
+    class={cn("size-28 shrink-0 rounded-lg object-cover sm:size-32", Astro.props.class)}
+  />
+)}

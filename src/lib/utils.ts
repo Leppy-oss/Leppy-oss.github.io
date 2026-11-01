@@ -1,3 +1,5 @@
+import { getCollection, type CollectionKey } from "astro:content";
+import type { ImageMetadata } from "astro";
 import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
 
@@ -5,36 +7,19 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
-export function formatDate(date: Date) {
-  return Intl.DateTimeFormat("en-US", {
-    month: "short",
-    day: "2-digit",
-    year: "numeric"
-  }).format(date);
+export function readingTime(text: string) {
+  const wordCount = text.replace(/<[^>]+>/g, "").split(/\s+/).length;
+  return `${Math.round(wordCount / 200 + 1)} min read`;
 }
 
-export function readingTime(html: string) {
-  const textOnly = html.replace(/<[^>]+>/g, "");
-  const wordCount = textOnly.split(/\s+/).length;
-  const readingTimeMinutes = ((wordCount / 200) + 1).toFixed();
-  return `${readingTimeMinutes} min read`;
+export async function getEntries<C extends CollectionKey>(collection: C) {
+  const entries = await getCollection(collection, ({ data }) => !data.draft);
+  return entries.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
 }
 
-export function dateRange(startDate: Date, endDate?: Date | string): string {
-  const startMonth = startDate.toLocaleString("default", { month: "short" });
-  const startYear = startDate.getFullYear().toString();
-  let endMonth;
-  let endYear;
+const headshots = import.meta.glob<ImageMetadata>("../assets/headshot.{jpg,jpeg,png,webp,avif}", {
+  eager: true,
+  import: "default",
+});
 
-  if (endDate) {
-    if (typeof endDate === "string") {
-      endMonth = "";
-      endYear = endDate;
-    } else {
-      endMonth = endDate.toLocaleString("default", { month: "short" });
-      endYear = endDate.getFullYear().toString();
-    }
-  }
-
-  return `${startMonth}${startYear} - ${endMonth}${endYear}`;
-}
+export const headshot: ImageMetadata | undefined = Object.values(headshots)[0];

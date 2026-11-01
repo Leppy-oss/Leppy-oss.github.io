@@ -10,7 +10,9 @@ import lora400 from "@fontsource/lora/files/lora-latin-400-normal.woff2";
 import lora600 from "@fontsource/lora/files/lora-latin-600-normal.woff2";
 
 import { ClientRouter } from "astro:transitions";
+import { getImage } from "astro:assets";
 import { SITE } from "@consts";
+import { headshot } from "@lib/utils";
 
 interface Props {
   title: string;
@@ -20,15 +22,17 @@ interface Props {
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 
-const { title, description, image = "/nano.png" } = Astro.props;
+const { title, description, image } = Astro.props;
+
+const favicon = headshot && await getImage({ src: headshot, width: 64, height: 64, format: "png" });
+const appleTouchIcon = headshot && await getImage({ src: headshot, width: 180, height: 180, format: "png" });
 ---
 
 <!-- Global Metadata -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<link rel="icon" type="image/svg+xml" href="/favicon-dark.svg" media="(prefers-color-scheme: dark)">
-<link rel="icon" type="image/svg+xml" href="/favicon-light.svg" media="(prefers-color-scheme: light)">
-<link rel="icon" type="image/x-icon" href="/favicon-light.svg">
+{favicon && <link rel="icon" type="image/png" href={favicon.src} />}
+{appleTouchIcon && <link rel="apple-touch-icon" href={appleTouchIcon.src} />}
 <meta name="generator" content={Astro.generator} />
 
 <!-- Font preloads -->
@@ -50,16 +54,16 @@ const { title, description, image = "/nano.png" } = Astro.props;
 <meta property="og:url" content={Astro.url} />
 <meta property="og:title" content={title} />
 <meta property="og:description" content={description} />
-<meta property="og:image" content={new URL(image, Astro.url)} />
+{image && <meta property="og:image" content={new URL(image, Astro.url)} />}
 
 <!-- Twitter -->
-<meta property="twitter:card" content="summary_large_image" />
+<meta property="twitter:card" content={image ? "summary_large_image" : "summary"} />
 <meta property="twitter:url" content={Astro.url} />
 <meta property="twitter:title" content={title} />
 <meta property="twitter:description" content={description} />
-<meta property="twitter:image" content={new URL(image, Astro.url)} />
+{image && <meta property="twitter:image" content={new URL(image, Astro.url)} />}
 
-<ClientRouter  />
+<ClientRouter />
 
 <!-- RSS Link -->
 <link rel="alternate" type="application/rss+xml" title={SITE.NAME} href={new URL("rss.xml", Astro.site)} />
@@ -90,25 +94,30 @@ const { title, description, image = "/nano.png" } = Astro.props;
     const lightThemeButton = document.getElementById("light-theme-button");
     lightThemeButton?.addEventListener("click", () => {
       localStorage.setItem("theme", "light");
-      toggleTheme(false);
+      switchTheme(false);
+      markThemeButtons();
     });
 
     const darkThemeButton = document.getElementById("dark-theme-button");
     darkThemeButton?.addEventListener("click", () => {
       localStorage.setItem("theme", "dark");
-      toggleTheme(true);
+      switchTheme(true);
+      markThemeButtons();
     });
 
     const systemThemeButton = document.getElementById("system-theme-button");
     systemThemeButton?.addEventListener("click", () => {
       localStorage.setItem("theme", "system");
-      toggleTheme(window.matchMedia("(prefers-color-scheme: dark)").matches);
+      switchTheme(window.matchMedia("(prefers-color-scheme: dark)").matches);
+      markThemeButtons();
     });
+
+    markThemeButtons();
 
     window.matchMedia("(prefers-color-scheme: dark)")
       .addEventListener("change", event => {
         if (localStorage.theme === "system" || !localStorage.theme) {
-          toggleTheme(event.matches);
+          switchTheme(event.matches);
         }
       }
     );
@@ -142,7 +151,7 @@ const { title, description, image = "/nano.png" } = Astro.props;
     });
   }
 
-function toggleTheme(dark) {
+  function toggleTheme(dark) {
     const css = document.createElement("style");
 
     css.appendChild(
@@ -166,8 +175,26 @@ function toggleTheme(dark) {
       document.documentElement.classList.remove("dark");
     }
 
-  window.getComputedStyle(css).opacity;
+    window.getComputedStyle(css).getPropertyValue("opacity");
     document.head.removeChild(css);
+  }
+
+  function switchTheme(dark) {
+    if (!document.startViewTransition || document.documentElement.classList.contains("dark") === dark) {
+      toggleTheme(dark);
+      return;
+    }
+    document.documentElement.classList.add("theme-switching");
+    document
+      .startViewTransition(() => toggleTheme(dark))
+      .finished.finally(() => document.documentElement.classList.remove("theme-switching"));
+  }
+
+  function markThemeButtons() {
+    const theme = localStorage.theme === "light" || localStorage.theme === "dark" ? localStorage.theme : "system";
+    ["light", "dark", "system"].forEach((name) => {
+      document.getElementById(`${name}-theme-button`)?.setAttribute("aria-pressed", String(name === theme));
+    });
   }
 
   function preloadTheme() {

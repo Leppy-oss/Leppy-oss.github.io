@@ -1,0 +1,157 @@
+---
+import { WEB3FORMS_ACCESS_KEY } from "astro:env/client";
+---
+
+<button
+  type="button"
+  data-resume-open
+  class="cursor-pointer underline underline-offset-2 decoration-black/15 dark:decoration-white/30 hover:decoration-black/25 hover:dark:decoration-white/50 text-current hover:text-black hover:dark:text-white transition-colors duration-300 ease-in-out"
+>
+  resume
+</button>
+
+<dialog
+  data-resume-dialog
+  class="m-auto w-[calc(100%-2.5rem)] max-w-sm rounded-lg border border-black/15 dark:border-white/20 bg-paper dark:bg-stone-900 p-0 font-sans text-black/50 dark:text-white/75"
+>
+  <form data-resume-form class="space-y-4 p-6">
+    <div class="space-y-1">
+      <div class="font-semibold text-black dark:text-white">Request my resume</div>
+      <p class="text-sm">Leave your email and I'll send it your way.</p>
+    </div>
+    <input type="hidden" name="access_key" value={WEB3FORMS_ACCESS_KEY} />
+    <input type="hidden" name="subject" value="Resume request" />
+    <input type="checkbox" name="botcheck" class="hidden" tabindex="-1" autocomplete="off" />
+    <input
+      type="email"
+      name="email"
+      required
+      placeholder="you@example.com"
+      autocomplete="email"
+      class="w-full rounded border border-black/15 dark:border-white/20 bg-transparent px-3 py-1.5 text-sm text-black dark:text-white placeholder:text-black/30 dark:placeholder:text-white/30 outline-none focus:border-black/40 dark:focus:border-white/50 transition-colors duration-300 ease-in-out"
+    />
+    <div class="flex items-center justify-between gap-4">
+      <p data-resume-status class="text-sm" aria-live="polite"></p>
+      <div class="flex shrink-0 gap-2 text-sm">
+        <button
+          type="button"
+          data-resume-close
+          class="cursor-pointer rounded border border-black/15 dark:border-white/20 px-3 py-1.5 hover:bg-black/5 dark:hover:bg-white/5 hover:text-black dark:hover:text-white transition-colors duration-300 ease-in-out"
+        >
+          Cancel
+        </button>
+        <button
+          type="submit"
+          class="cursor-pointer rounded border border-black/15 dark:border-white/20 px-3 py-1.5 text-black dark:text-white hover:bg-black/5 dark:hover:bg-white/5 disabled:opacity-50 transition-colors duration-300 ease-in-out"
+        >
+          Send
+        </button>
+      </div>
+    </div>
+  </form>
+</dialog>
+
+<style>
+  dialog {
+    opacity: 0;
+    translate: 0 0.75rem;
+    transition:
+      opacity 300ms ease-out,
+      translate 300ms ease-out;
+  }
+
+  dialog[open]:not([data-closing]) {
+    opacity: 1;
+    translate: 0 0;
+  }
+
+  @starting-style {
+    dialog[open]:not([data-closing]) {
+      opacity: 0;
+      translate: 0 0.75rem;
+    }
+  }
+
+  dialog::backdrop {
+    background-color: transparent;
+    transition: background-color 300ms ease-out;
+  }
+
+  dialog[open]:not([data-closing])::backdrop {
+    background-color: rgb(0 0 0 / 0.2);
+  }
+
+  :global(.dark) dialog[open]:not([data-closing])::backdrop {
+    background-color: rgb(0 0 0 / 0.5);
+  }
+
+  @starting-style {
+    dialog[open]:not([data-closing])::backdrop {
+      background-color: transparent;
+    }
+  }
+</style>
+
+<script>
+  function setup() {
+    const open = document.querySelector<HTMLButtonElement>("[data-resume-open]");
+    const dialog = document.querySelector<HTMLDialogElement>("[data-resume-dialog]");
+    const form = document.querySelector<HTMLFormElement>("[data-resume-form]");
+    const status = document.querySelector<HTMLParagraphElement>("[data-resume-status]");
+    const close = document.querySelector<HTMLButtonElement>("[data-resume-close]");
+    const submit = form?.querySelector<HTMLButtonElement>("button[type=submit]");
+    if (!open || !dialog || !form || !status || !close || !submit) {
+      return;
+    }
+
+    async function hide() {
+      if (!dialog || dialog.hasAttribute("data-closing")) {
+        return;
+      }
+      dialog.setAttribute("data-closing", "");
+      await Promise.allSettled(dialog.getAnimations({ subtree: true }).map((animation) => animation.finished));
+      dialog.removeAttribute("data-closing");
+      dialog.close();
+    }
+
+    open.addEventListener("click", () => {
+      status.textContent = "";
+      dialog.showModal();
+    });
+    close.addEventListener("click", hide);
+    dialog.addEventListener("cancel", (event) => {
+      event.preventDefault();
+      hide();
+    });
+    dialog.addEventListener("click", (event) => {
+      if (event.target === dialog) {
+        hide();
+      }
+    });
+
+    form.addEventListener("submit", async (event) => {
+      event.preventDefault();
+      submit.disabled = true;
+      status.textContent = "Sending...";
+      try {
+        const response = await fetch("https://api.web3forms.com/submit", {
+          method: "POST",
+          headers: { Accept: "application/json" },
+          body: new FormData(form),
+        });
+        const result = await response.json();
+        if (!result.success) {
+          throw new Error(result.message);
+        }
+        form.reset();
+        status.textContent = "Thanks! I'll be in touch.";
+      } catch (error) {
+        status.textContent = (error instanceof Error && error.message) || "Something went wrong.";
+      } finally {
+        submit.disabled = false;
+      }
+    });
+  }
+
+  document.addEventListener("astro:page-load", setup);
+</script>
