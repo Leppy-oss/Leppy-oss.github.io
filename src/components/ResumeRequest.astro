@@ -16,12 +16,20 @@ import { WEB3FORMS_ACCESS_KEY } from "astro:env/client";
 >
   <form data-resume-form class="space-y-4 p-6">
     <div class="space-y-1">
-      <div class="font-semibold text-black dark:text-white">Request my resume</div>
-      <p class="text-sm">Leave your email and I'll send it your way.</p>
+      <div class="font-semibold text-black dark:text-white">
+        Request my resume
+      </div>
+      <p class="text-sm">Enter your email and I'll send it your way!</p>
     </div>
     <input type="hidden" name="access_key" value={WEB3FORMS_ACCESS_KEY} />
     <input type="hidden" name="subject" value="Resume request" />
-    <input type="checkbox" name="botcheck" class="hidden" tabindex="-1" autocomplete="off" />
+    <input
+      type="checkbox"
+      name="botcheck"
+      class="hidden"
+      tabindex="-1"
+      autocomplete="off"
+    />
     <input
       type="email"
       name="email"
@@ -94,12 +102,21 @@ import { WEB3FORMS_ACCESS_KEY } from "astro:env/client";
 
 <script>
   function setup() {
-    const open = document.querySelector<HTMLButtonElement>("[data-resume-open]");
-    const dialog = document.querySelector<HTMLDialogElement>("[data-resume-dialog]");
+    const open =
+      document.querySelector<HTMLButtonElement>("[data-resume-open]");
+    const dialog = document.querySelector<HTMLDialogElement>(
+      "[data-resume-dialog]",
+    );
     const form = document.querySelector<HTMLFormElement>("[data-resume-form]");
-    const status = document.querySelector<HTMLParagraphElement>("[data-resume-status]");
-    const close = document.querySelector<HTMLButtonElement>("[data-resume-close]");
-    const submit = form?.querySelector<HTMLButtonElement>("button[type=submit]");
+    const status = document.querySelector<HTMLParagraphElement>(
+      "[data-resume-status]",
+    );
+    const close = document.querySelector<HTMLButtonElement>(
+      "[data-resume-close]",
+    );
+    const submit = form?.querySelector<HTMLButtonElement>(
+      "button[type=submit]",
+    );
     if (!open || !dialog || !form || !status || !close || !submit) {
       return;
     }
@@ -109,7 +126,11 @@ import { WEB3FORMS_ACCESS_KEY } from "astro:env/client";
         return;
       }
       dialog.setAttribute("data-closing", "");
-      await Promise.allSettled(dialog.getAnimations({ subtree: true }).map((animation) => animation.finished));
+      await Promise.allSettled(
+        dialog
+          .getAnimations({ subtree: true })
+          .map((animation) => animation.finished),
+      );
       dialog.removeAttribute("data-closing");
       dialog.close();
     }
@@ -146,7 +167,8 @@ import { WEB3FORMS_ACCESS_KEY } from "astro:env/client";
         form.reset();
         status.textContent = "Thanks! I'll be in touch.";
       } catch (error) {
-        status.textContent = (error instanceof Error && error.message) || "Something went wrong.";
+        status.textContent =
+          (error instanceof Error && error.message) || "Something went wrong.";
       } finally {
         submit.disabled = false;
       }
